@@ -3,12 +3,13 @@
 
 HyBi Working Group                                              I. Fette
 Internet-Draft                                              Google, Inc.
-Intended status: Standards Track                           June 13, 2011
-Expires: December 15, 2011
+Intended status: Standards Track                             A. Melnikov
+Expires: January 12, 2012                                      Isode Ltd
+                                                           July 11, 2011
 
 
                          The WebSocket protocol
-                draft-ietf-hybi-thewebsocketprotocol-09
+                draft-ietf-hybi-thewebsocketprotocol-10
 
 Abstract
 
@@ -17,13 +18,10 @@ Abstract
    remote host that has opted-in to communications from that code.  The
    security model used for this is the Origin-based security model
    commonly used by Web browsers.  The protocol consists of an opening
-   handshake followed by basic message framing, layered over TCP.  (In
-   theory, any transport protocol could be used so long as it provides
-   for reliable transport, is byte clean, and supports relatively large
-   message sizes.  However, for this document, we consider only TCP.)
-   The goal of this technology is to provide a mechanism for browser-
-   based applications that need two-way communication with servers that
-   does not rely on opening multiple HTTP connections (e.g. using
+   handshake followed by basic message framing, layered over TCP.  The
+   goal of this technology is to provide a mechanism for browser-based
+   applications that need two-way communication with servers that does
+   not rely on opening multiple HTTP connections (e.g. using
    XMLHttpRequest or <iframe>s and long polling).
 
    Please send feedback to the hybi@ietf.org mailing list.
@@ -43,21 +41,22 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 15, 2011.
+   This Internet-Draft will expire on January 12, 2012.
 
 Copyright Notice
 
    Copyright (c) 2011 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-
-
-Fette                   Expires December 15, 2011               [Page 1]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
    This document is subject to BCP 78 and the IETF Trust's Legal
+
+
+
+Fette & Melnikov        Expires January 12, 2012                [Page 1]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
    Provisions Relating to IETF Documents
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
@@ -98,22 +97,22 @@ Table of Contents
    5.  Opening Handshake  . . . . . . . . . . . . . . . . . . . . . . 27
      5.1.   Client Requirements . . . . . . . . . . . . . . . . . . . 27
      5.2.   Server-side Requirements  . . . . . . . . . . . . . . . . 32
-       5.2.1.  Reading the Client's Opening Handshake . . . . . . . . 32
+       5.2.1.  Reading the Client's Opening Handshake . . . . . . . . 33
        5.2.2.  Sending the Server's Opening Handshake . . . . . . . . 33
    6.  Sending and Receiving Data . . . . . . . . . . . . . . . . . . 37
      6.1.   Sending Data  . . . . . . . . . . . . . . . . . . . . . . 37
      6.2.   Receiving Data  . . . . . . . . . . . . . . . . . . . . . 37
    7.  Closing the connection . . . . . . . . . . . . . . . . . . . . 39
      7.1.   Definitions . . . . . . . . . . . . . . . . . . . . . . . 39
-
-
-
-Fette                   Expires December 15, 2011               [Page 2]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
        7.1.1.  Close the WebSocket Connection . . . . . . . . . . . . 39
+
+
+
+Fette & Melnikov        Expires January 12, 2012                [Page 2]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
        7.1.2.  Start the WebSocket Closing Handshake  . . . . . . . . 39
        7.1.3.  The WebSocket Closing Handshake is Started . . . . . . 39
        7.1.4.  The WebSocket Connection is Closed . . . . . . . . . . 40
@@ -128,8 +127,7 @@ Internet-Draft           The WebSocket protocol                June 2011
        7.4.1.  Defined Status Codes . . . . . . . . . . . . . . . . . 42
        7.4.2.  Reserved Status Code Ranges  . . . . . . . . . . . . . 43
    8.  Error Handling . . . . . . . . . . . . . . . . . . . . . . . . 45
-     8.1.   Handling Errors in UTF-8 from the Server  . . . . . . . . 45
-     8.2.   Handling Errors in UTF-8 from the Client  . . . . . . . . 45
+     8.1.   Handling Errors in UTF-8 Encoded Data . . . . . . . . . . 45
    9.  Extensions . . . . . . . . . . . . . . . . . . . . . . . . . . 46
      9.1.   Negotiating Extensions  . . . . . . . . . . . . . . . . . 46
      9.2.   Known Extensions  . . . . . . . . . . . . . . . . . . . . 47
@@ -156,7 +154,7 @@ Internet-Draft           The WebSocket protocol                June 2011
    14. References . . . . . . . . . . . . . . . . . . . . . . . . . . 65
      14.1.  Normative References  . . . . . . . . . . . . . . . . . . 65
      14.2.  Informative References  . . . . . . . . . . . . . . . . . 66
-   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 68
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 68
 
 
 
@@ -164,9 +162,11 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011               [Page 3]
+
+
+Fette & Melnikov        Expires January 12, 2012                [Page 3]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 1.  Introduction
@@ -175,10 +175,11 @@ Internet-Draft           The WebSocket protocol                June 2011
 
    _This section is non-normative._
 
-   Historically, creating an instant messenger chat client as a Web
-   application has required an abuse of HTTP to poll the server for
-   updates while sending upstream notifications as distinct HTTP
-   calls.[RFC6202]
+   Historically, creating Web applications that need bidirectional
+   communication between a client and a server (e.g., instant messaging
+   and gaming applications) has required an abuse of HTTP to poll the
+   server for updates while sending upstream notifications as distinct
+   HTTP calls.[RFC6202]
 
    This results in a variety of problems:
 
@@ -219,10 +220,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-
-Fette                   Expires December 15, 2011               [Page 4]
+Fette & Melnikov        Expires January 12, 2012                [Page 4]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
         GET /chat HTTP/1.1
@@ -249,8 +249,8 @@ Internet-Draft           The WebSocket protocol                June 2011
    After the leading line in both cases come an unordered set of header
    fields.  The meaning of these header fields is specified in Section 5
    of this document.  Additional header fields may also be present, such
-   as cookies [I-D.ietf-httpstate-cookie] required to identify the user.
-   The format and parsing of headers is as defined in [RFC2616].
+   as cookies [RFC6265] required to identify the user.  The format and
+   parsing of headers is as defined in [RFC2616].
 
 
    Once the client and server have both sent their handshakes, and if
@@ -276,9 +276,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011               [Page 5]
+Fette & Melnikov        Expires January 12, 2012                [Page 5]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    control frames, which are not intended to carry data for the
@@ -312,8 +312,9 @@ Internet-Draft           The WebSocket protocol                June 2011
         Sec-WebSocket-Protocol: chat, superchat
         Sec-WebSocket-Version: 8
 
-   Headers in the handshake are sent by the client in a random order;
-   the order is not meaningful.
+   In compliance with [RFC2616], header fields in the handshake may be
+   sent by the client in any order, so the order in which different
+   header fields are received is not significant.
 
    The "Request-URI" of the GET method [RFC2616] is used to identify the
    endpoint of the WebSocket connection, both to allow multiple domains
@@ -328,15 +329,15 @@ Internet-Draft           The WebSocket protocol                June 2011
    Additional headers are used to select options in the WebSocket
    protocol.  Options available in this version are the subprotocol
    selector, |Sec-WebSocket-Protocol|, and |Cookie|, which can used for
-   sending cookies to the server (e.g. as an authentication mechanism).
 
 
 
-Fette                   Expires December 15, 2011               [Page 6]
+Fette & Melnikov        Expires January 12, 2012                [Page 6]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
+   sending cookies to the server (e.g. as an authentication mechanism).
    The |Sec-WebSocket-Protocol| request-header field can be used to
    indicate what subprotocols (application-level protocols layered over
    the WebSocket protocol) are acceptable to the client.  The server
@@ -361,9 +362,10 @@ Internet-Draft           The WebSocket protocol                June 2011
    mechanism of the |Sec-WebSocket-Origin| header, determine whether to
    extend those communication privileges to the JavaScript application.
    A JavaScript application cannot set a header starting with "Sec-" via
-   XHR.  The intent is not to prevent non-browsers from establishing
-   connections, but rather to ensure that browsers under the control of
-   potentially malicious JavaScript cannot fake a WebSocket handshake.
+   XMLHttpRequest.  The intent is not to prevent non-browsers from
+   establishing connections, but rather to ensure that browsers under
+   the control of potentially malicious JavaScript cannot fake a
+   WebSocket handshake.
 
    Finally, the server has to prove to the client that it received the
    client's WebSocket handshake, so that the server doesn't accept
@@ -379,21 +381,21 @@ Internet-Draft           The WebSocket protocol                June 2011
         Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
 
    For this header, the server has to take the value (as present in the
-   header, e.g. the base64-encoded [RFC4648] version minus leading and
-   trailing whitespace), and concatenate this with the GUID "258EAFA5-
-   E914-47DA-95CA-C5AB0DC85B11" in string form, which is unlikely to be
-   used by network endpoints that do not understand the WebSocket
-   protocol.  A SHA-1 hash (160 bits), base64-encoded, of this
-   concatenation is then returned in the server's handshake
+   header, e.g. the base64-encoded [RFC4648] version minus any leading
+   and trailing whitespace), and concatenate this with the GUID
+   "258EAFA5-E914-47DA-95CA-C5AB0DC85B11" in string form, which is
+   unlikely to be used by network endpoints that do not understand the
 
 
 
-Fette                   Expires December 15, 2011               [Page 7]
+Fette & Melnikov        Expires January 12, 2012                [Page 7]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
-   [FIPS.180-2.2002].
+   WebSocket protocol.  A SHA-1 hash (160 bits), base64-encoded (see
+   Section 4 of [RFC4648]), of this concatenation is then returned in
+   the server's handshake [FIPS.180-2.2002].
 
    Concretely, if as in the example above, header |Sec-WebSocket-Key|
    had the value "dGhlIHNhbXBsZSBub25jZQ==", the server would
@@ -402,9 +404,9 @@ Internet-Draft           The WebSocket protocol                June 2011
    C5AB0DC85B11".  The server would then take the SHA-1 hash of this,
    giving the value 0xb3 0x7a 0x4f 0x2c 0xc0 0x62 0x4f 0x16 0x90 0xf6
    0x46 0x06 0xcf 0x38 0x59 0x45 0xb2 0xbe 0xc4 0xea.  This value is
-   then base64-encoded, to give the value "s3pPLMBiTxaQ9kYGzzhZRbK+
-   xOo=".  This value would then be echoed in the header |Sec-WebSocket-
-   Accept|.
+   then base64-encoded (see Section 4 of [RFC4648]), to give the value
+   "s3pPLMBiTxaQ9kYGzzhZRbK+xOo=".  This value would then be echoed in
+   the header |Sec-WebSocket-Accept|.
 
 
    The handshake from the server is much simpler than the client
@@ -439,16 +441,16 @@ Internet-Draft           The WebSocket protocol                June 2011
    Option fields can also be included.  In this version of the protocol,
    the main option field is |Sec-WebSocket-Protocol|, which indicates
    the subprotocol that the server has selected.  Web browsers verify
+
+
+
+Fette & Melnikov        Expires January 12, 2012                [Page 8]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
    that the server included one of the values as was specified in the
    WebSocket client's handshake.  A server that speaks multiple
-
-
-
-Fette                   Expires December 15, 2011               [Page 8]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
    subprotocols has to make sure it selects one based on the client's
    handshake and specifies it in its handshake.
 
@@ -480,8 +482,8 @@ Internet-Draft           The WebSocket protocol                June 2011
 
    The closing handshake is intended to complement the TCP closing
    handshake (FIN/ACK), on the basis that the TCP closing handshake is
-   not always reliable end-to-end, especially in the presence of man-in-
-   the-middle proxies and other intermediaries.
+   not always reliable end-to-end, especially in the presence of
+   intercepting proxies and other intermediaries.
 
    By sending a close frame and waiting for a close frame in response,
    certain cases are avoided where data may be unnecessarily lost.  For
@@ -495,34 +497,41 @@ Internet-Draft           The WebSocket protocol                June 2011
    _This section is non-normative._
 
    The WebSocket protocol is designed on the principle that there should
+
+
+
+Fette & Melnikov        Expires January 12, 2012                [Page 9]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
    be minimal framing (the only framing that exists is to make the
    protocol frame-based instead of stream-based, and to support a
-
-
-
-Fette                   Expires December 15, 2011               [Page 9]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
    distinction between Unicode text and binary frames).  It is expected
    that metadata would be layered on top of WebSocket by the application
    layer, in the same way that metadata is layered on top of TCP by the
-   application layer (HTTP).
+   application layer (e.g., HTTP).
 
    Conceptually, WebSocket is really just a layer on top of TCP that
-   adds a Web "origin"-based security model for browsers; adds an
-   addressing and protocol naming mechanism to support multiple services
-   on one port and multiple host names on one IP address; layers a
-   framing mechanism on top of TCP to get back to the IP packet
-   mechanism that TCP is built on, but without length limits; and
-   includes an additional closing handshake in-band that is designed to
-   work in the presence of proxies and other intermediaries.  Other than
-   that, it adds nothing.  Basically it is intended to be as close to
-   just exposing raw TCP to script as possible given the constraints of
-   the Web. It's also designed in such a way that its servers can share
-   a port with HTTP servers, by having its handshake be a valid HTTP
-   Upgrade request mechanism also.
+   does the following:
+
+   o  adds a Web "origin"-based security model for browsers
+
+   o  adds an addressing and protocol naming mechanism to support
+      multiple services on one port and multiple host names on one IP
+      address;
+
+   o  layers a framing mechanism on top of TCP to get back to the IP
+      packet mechanism that TCP is built on, but without length limits
+
+   o  includes an additional closing handshake in-band that is designed
+      to work in the presence of proxies and other intermediaries
+
+   Other than that, WebSocket adds nothing.  Basically it is intended to
+   be as close to just exposing raw TCP to script as possible given the
+   constraints of the Web. It's also designed in such a way that its
+   servers can share a port with HTTP servers, by having its handshake
+   be a valid HTTP Upgrade request mechanism also.
 
    The protocol is intended to be extensible; future versions will
    likely introduce additional concepts such as multiplexing.
@@ -544,6 +553,14 @@ Internet-Draft           The WebSocket protocol                June 2011
    desired.  This is achieved by having a strict and elaborate
    handshake, and by limiting the data that can be inserted into the
    connection before the handshake is finished (thus limiting how much
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 10]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
    the server can be influenced).
 
    It is similarly intended to fail to establish a connection when data
@@ -553,14 +570,6 @@ Internet-Draft           The WebSocket protocol                June 2011
    server prove that it read the handshake, which it can only do if the
    handshake contains the appropriate parts which themselves can only be
    sent by a WebSocket handshake.  In particular, at the time of writing
-
-
-
-Fette                   Expires December 15, 2011              [Page 10]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
    of this specification, fields starting with |Sec-| cannot be set by
    an attacker from a Web browser using only HTML and JavaScript APIs
    such as |XMLHttpRequest|.
@@ -600,6 +609,14 @@ Internet-Draft           The WebSocket protocol                June 2011
 
    _This section is non-normative._
 
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 11]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
    The client can request that the server use a specific subprotocol by
    including the |Sec-WebSocket-Protocol| field in its handshake.  If it
    is specified, the server needs to include the same field and one of
@@ -608,22 +625,14 @@ Internet-Draft           The WebSocket protocol                June 2011
 
    These subprotocol names should be registered as per Section 11.10.
    To avoid potential collisions, it is recommended to use names that
-   contain the domain name of the subprotocol's originator.  For
-
-
-
-Fette                   Expires December 15, 2011              [Page 11]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
-   example, if Example Corporation were to create a Chat subprotocol to
-   be implemented by many servers around the Web, they could name it
-   "chat.example.com".  If the Example Organization called their
-   competing subprotocol "chat.example.org", then the two subprotocols
-   could be implemented by servers simultaneously, with the server
-   dynamically selecting which subprotocol to use based on the value
-   sent by the client.
+   contain the ASCII version of the domain name of the subprotocol's
+   originator.  For example, if Example Corporation were to create a
+   Chat subprotocol to be implemented by many servers around the Web,
+   they could name it "chat.example.com".  If the Example Organization
+   called their competing subprotocol "chat.example.org", then the two
+   subprotocols could be implemented by servers simultaneously, with the
+   server dynamically selecting which subprotocol to use based on the
+   value sent by the client.
 
    Subprotocols can be versioned in backwards-incompatible ways by
    changing the subprotocol name, e.g. going from "bookings.example.net"
@@ -659,18 +668,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-
-
-
-
-
-
-
-
-
-Fette                   Expires December 15, 2011              [Page 12]
+Fette & Melnikov        Expires January 12, 2012               [Page 12]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 2.  Conformance Requirements
@@ -724,9 +724,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 13]
+Fette & Melnikov        Expires January 12, 2012               [Page 13]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    LETTER Z).
@@ -780,9 +780,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 14]
+Fette & Melnikov        Expires January 12, 2012               [Page 14]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 3.  WebSocket URIs
@@ -803,10 +803,11 @@ Internet-Draft           The WebSocket protocol                June 2011
    The port component is OPTIONAL; the default for "ws" is port 80,
    while the default for "wss" is port 443.
 
-   The URI is called "secure" if the scheme component matches "wss"
-   case-insensitively.
+   The URI is called "secure" (and it said that "the secure flag is
+   set") if the scheme component matches "wss" case-insensitively.
 
-   The "resource-name" can be constructed by concatenating
+   The "resource-name" (also known as /resource name/ in Section 5.1)
+   can be constructed by concatenating
 
    o  "/" if the path component is empty
 
@@ -835,10 +836,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-
-Fette                   Expires December 15, 2011              [Page 15]
+Fette & Melnikov        Expires January 12, 2012               [Page 15]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 4.  Data Framing
@@ -892,9 +892,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 16]
+Fette & Melnikov        Expires January 12, 2012               [Page 16]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    FIN:  1 bit
@@ -913,8 +913,8 @@ Internet-Draft           The WebSocket protocol                June 2011
    Opcode:  4 bits
 
       Defines the interpretation of the payload data.  If an unknown
-      opcode is received, the receiving endpoint MUST ignore that frame.
-      The following values are defined.
+      opcode is received, the receiving endpoint MUST _Fail the
+      WebSocket Connection_.  The following values are defined.
 
       *  %x0 denotes a continuation frame
 
@@ -948,9 +948,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 17]
+Fette & Melnikov        Expires January 12, 2012               [Page 17]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
       most significant bit MUST be 0) are the payload length.  Multibyte
@@ -1004,19 +1004,22 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 18]
+Fette & Melnikov        Expires January 12, 2012               [Page 18]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    frame-fin               = %x0 ; more frames of this message follow
                            / %x1 ; final frame of this message
 
-   frame-rsv1              = %x0 ; 1 bit, MUST be 0
+   frame-rsv1              = %x0
+                             ; 1 bit, MUST be 0 unless negotiated otherwise
 
-   frame-rsv2              = %x0 ; 1 bit, MUST be 0
+   frame-rsv2              = %x0
+                             ; 1 bit, MUST be 0 unless negotiated otherwise
 
-   frame-rsv3              = %x0 ; 1 bit, MUST be 0
+   frame-rsv3              = %x0
+                             ; 1 bit, MUST be 0 unless negotiated otherwise
 
    frame-opcode            = %x0 ; continuation frame
                            / %x1 ; text frame
@@ -1057,12 +1060,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-
-
-
-Fette                   Expires December 15, 2011              [Page 19]
+Fette & Melnikov        Expires January 12, 2012               [Page 19]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 4.3.  Client-to-Server Masking
@@ -1103,10 +1103,10 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
    When preparing a masked frame, the client MUST pick a fresh masking
-   key uniformly at random from the set of allowed 32-bit values.  The
-   unpredictability of the masking key is essential to prevent the
-   author of malicious applications from selecting the bytes that appear
-   on the wire.
+   key from the set of allowed 32-bit values.  The masking key must be
+   unpredictable.  The unpredictability of the masking key is essential
+   to prevent the author of malicious applications from selecting the
+   bytes that appear on the wire.
 
    The payload length, indicated in the framing as frame-payload-length,
    does NOT include the length of the masking key.  It is the length of
@@ -1116,9 +1116,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 20]
+Fette & Melnikov        Expires January 12, 2012               [Page 20]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 4.4.  Fragmentation
@@ -1172,9 +1172,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 21]
+Fette & Melnikov        Expires January 12, 2012               [Page 21]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    o  The fragments of one message MUST NOT be interleaved between the
@@ -1228,9 +1228,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 22]
+Fette & Melnikov        Expires January 12, 2012               [Page 22]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    and MUST NOT be fragmented.
@@ -1284,9 +1284,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 23]
+Fette & Melnikov        Expires January 12, 2012               [Page 23]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 4.5.2.  Ping
@@ -1340,9 +1340,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 24]
+Fette & Melnikov        Expires January 12, 2012               [Page 24]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    Binary
@@ -1396,14 +1396,14 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 25]
+Fette & Melnikov        Expires January 12, 2012               [Page 25]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    The negotiation of extensions is discussed in further detail in
    Section 9.1.  Below are some anticipated uses of extensions.  This
-   list is neither complete nor proscriptive.
+   list is neither complete nor prescriptive.
 
    o  Extension data may be placed in the payload data before the
       application data.
@@ -1452,9 +1452,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 26]
+Fette & Melnikov        Expires January 12, 2012               [Page 26]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 5.  Opening Handshake
@@ -1471,7 +1471,7 @@ Internet-Draft           The WebSocket protocol                June 2011
    supplied.
 
    Clients running in controlled environments, e.g. browsers on mobile
-   handsets tied to specific carriers, may offload the management of the
+   handsets tied to specific carriers, MAY offload the management of the
    connection to another agent on the network.  In such a situation, the
    client for the purposes of conformance is considered to include both
    the handset software and any such agents.
@@ -1508,39 +1508,40 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 27]
+Fette & Melnikov        Expires January 12, 2012               [Page 27]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
        proxy server that performs DNS queries itself), then the client
        MUST assume for the purposes of this step that each host name
-       refers to a distinct remote host, and should instead limit the
-       total number of simultaneous connections that are not established
-       to a reasonably low number (e.g., in a Web browser, simultaneous
-       pending connections to a.example.com and b.example.com would be
-       allowed, but if thirty connections are requested, that may not be
-       allowed.  The limit should consider the number of tabs the user
-       has open.
+       refers to a distinct remote host, and instead the client SHOULD
+       limit the total number of simultaneous pending connections to a
+       reasonably low number (e.g., the client might allow simultaneous
+       pending connections to a.example.com and b.example.com, but if
+       thirty simultaneous connections to a single host are requested,
+       that may not be allowed).  In a Web browser context, the client
+       SHOULD consider the number of tabs the user has open in setting a
+       limit to the number of simultaneous pending connections.
 
        NOTE: This makes it harder for a script to perform a denial of
        service attack by just opening a large number of WebSocket
        connections to a remote host.  A server can further reduce the
-       load on itself when attacked by making use of this by pausing
-       before closing the connection, as that will reduce the rate at
-       which the client reconnects.
+       load on itself when attacked by pausing before closing the
+       connection, as that will reduce the rate at which the client
+       reconnects.
 
        NOTE: There is no limit to the number of established WebSocket
        connections a client can have with a single remote host.  Servers
-       can refuse to accept connections from hosts with an excessive
-       number of existing connections, or disconnect resource-hogging
-       connections when suffering high load.
+       can refuse to accept connections from hosts/IP addresses with an
+       excessive number of existing connections, or disconnect resource-
+       hogging connections when suffering high load.
 
    3.  _Proxy Usage_: If the client is configured to use a proxy when
-       using the WebSocket protocol to connect to host /host/ and/or
-       port /port/, then the client SHOULD connect to that proxy and ask
-       it to open a TCP connection to the host given by /host/ and the
-       port given by /port/.
+       using the WebSocket protocol to connect to host /host/ and port
+       /port/, then the client SHOULD connect to that proxy and ask it
+       to open a TCP connection to the host given by /host/ and the port
+       given by /port/.
 
           EXAMPLE: For example, if the client uses an HTTP proxy for all
           traffic, then if it was to try to connect to port 80 on server
@@ -1560,21 +1561,22 @@ Internet-Draft           The WebSocket protocol                June 2011
 
        If the client is not configured to use a proxy, then a direct TCP
        connection SHOULD be opened to the host given by /host/ and the
-       port given by /port/.
 
 
 
-Fette                   Expires December 15, 2011              [Page 28]
+Fette & Melnikov        Expires January 12, 2012               [Page 28]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
+
+       port given by /port/.
 
        NOTE: Implementations that do not expose explicit UI for
        selecting a proxy for WebSocket connections separate from other
-       proxies are encouraged to use a SOCKS proxy for WebSocket
-       connections, if available, or failing that, to prefer the proxy
-       configured for HTTPS connections over the proxy configured for
-       HTTP connections.
+       proxies are encouraged to use a SOCKS5 [RFC1928] proxy for
+       WebSocket connections, if available, or failing that, to prefer
+       the proxy configured for HTTPS connections over the proxy
+       configured for HTTP connections.
 
        For the purpose of proxy autoconfiguration scripts, the URI to
        pass the function MUST be constructed from /host/, /port/,
@@ -1615,15 +1617,15 @@ Internet-Draft           The WebSocket protocol                June 2011
         be at least 1.1.
 
         For example, if the WebSocket URI is "ws://example.com/chat",
-        The first line sent should be "GET /chat HTTP/1.1"
 
 
 
-
-Fette                   Expires December 15, 2011              [Page 29]
+Fette & Melnikov        Expires January 12, 2012               [Page 29]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
+
+        The first line sent should be "GET /chat HTTP/1.1"
 
    3.   The request MUST contain a "Request-URI" as part of the GET
         method.  This MUST match the /resource name/ Section 3 (a
@@ -1643,8 +1645,8 @@ Internet-Draft           The WebSocket protocol                June 2011
    7.   The request MUST include a header with the name "Sec-WebSocket-
         Key".  The value of this header MUST be a nonce consisting of a
         randomly selected 16-byte value that has been base64-encoded
-        [RFC3548].  The nonce MUST be selected randomly for each
-        connection.
+        (see Section 4 of [RFC4648]).  The nonce MUST be selected
+        randomly for each connection.
 
         NOTE: As an example, if the randomly selected value was the
         sequence of bytes 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09
@@ -1671,28 +1673,28 @@ Internet-Draft           The WebSocket protocol                June 2011
         Version".  The value of this header MUST be 8. _Note: Although a
         draft -09 was published, as -09 was comprised of editorial
         changes and not changes to the wire protocol, 9 was not used as
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 30]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
         a valid value for Sec-WebSocket-Version.  This value was
         reserved in the IANA registry but was not and will not be used.
-
-
-
-Fette                   Expires December 15, 2011              [Page 30]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
         If subsequent changes to the wire protocol are necessary, 9 will
         be skipped to prevent confusion with the draft 9 protocol._
 
    10.  The request MAY include a header with the name "Sec-WebSocket-
-        Protocol".  If present, this value indicates the subprotocol(s)
-        the client wishes to speak, ordered by preference.  The elements
-        that comprise this value MUST be non-empty strings with
-        characters in the range U+0021 to U+007E not including separator
-        characters as defined in [RFC2616], and MUST all be unique
-        strings.  The ABNF for the value of this header is 1#token,
-        where the definitions of constructs and rules are as given in
-        [RFC2616].
+        Protocol".  If present, this value indicates one or more comma
+        separated subprotocol the client wishes to speak, ordered by
+        preference.  The elements that comprise this value MUST be non-
+        empty strings with characters in the range U+0021 to U+007E not
+        including separator characters as defined in [RFC2616], and MUST
+        all be unique strings.  The ABNF for the value of this header is
+        1#token, where the definitions of constructs and rules are as
+        given in [RFC2616].
 
    11.  The request MAY include a header with the name "Sec-WebSocket-
         Extensions".  If present, this value indicates the protocol-
@@ -1701,9 +1703,9 @@ Internet-Draft           The WebSocket protocol                June 2011
         Section 9.1.
 
    12.  The request MAY include headers associated with sending cookies,
-        as defined by the appropriate specifications
-        [I-D.ietf-httpstate-cookie].  These headers are referred to as
-        _Headers to Send Appropriate Cookies_.
+        as defined by the appropriate specifications [RFC6265].  These
+        headers are referred to as _Headers to Send Appropriate
+        Cookies_.
 
    Once the client's opening handshake has been sent, the client MUST
    wait for a response from the server before sending any further data.
@@ -1727,15 +1729,16 @@ Internet-Draft           The WebSocket protocol                June 2011
        "Sec-WebSocket-Accept" contains a value other than the base64-
        encoded SHA-1 of the concatenation of the "Sec-WebSocket-Key" (as
        a string, not base64-decoded) with the string "258EAFA5-E914-
-       47DA-95CA-C5AB0DC85B11", the client MUST _Fail the WebSocket
-       Connection_
 
 
 
-Fette                   Expires December 15, 2011              [Page 31]
+Fette & Melnikov        Expires January 12, 2012               [Page 31]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
+
+       47DA-95CA-C5AB0DC85B11", but ignoring any leading and trailing
+       whitespace, the client MUST _Fail the WebSocket Connection_
 
    5.  If the response includes a "Sec-WebSocket-Extensions" header, and
        this header indicates the use of an extension that was not
@@ -1743,6 +1746,10 @@ Internet-Draft           The WebSocket protocol                June 2011
        extension not requested by the client), the client MUST _Fail the
        WebSocket Connection_.  (The parsing of this header to determine
        which extensions are requested is discussed in Section 9.1.)
+
+   If the server's response does not conform to the requirements for the
+   server's handshake as defined in this section and in Section 5.2.2,
+   the client MUST _Fail the WebSocket Connection_.
 
    If the server's response is validated as provided for above, it is
    said that _The WebSocket Connection is Established_ and that the
@@ -1755,8 +1762,8 @@ Internet-Draft           The WebSocket protocol                June 2011
    server's handshake, or the null value if that header was not present
    in the server's handshake.  Additionally, if any headers in the
    server's handshake indicate that cookies should be set (as defined by
-   [I-D.ietf-httpstate-cookie]), these cookies are referred to as
-   _Cookies Set During the Server's Opening Handshake_.
+   [RFC6265]), these cookies are referred to as _Cookies Set During the
+   Server's Opening Handshake_.
 
 5.2.  Server-side Requirements
 
@@ -1775,6 +1782,17 @@ Internet-Draft           The WebSocket protocol                June 2011
    For the purposes of this specification, the "server" is the
    combination of both computers.
 
+
+
+
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 32]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
 5.2.1.  Reading the Client's Opening Handshake
 
    When a client starts a WebSocket connection, it sends its part of the
@@ -1784,17 +1802,11 @@ Internet-Draft           The WebSocket protocol                June 2011
 
    The client's opening handshake consists of the following parts.  If
    the server, while reading the handshake, finds that the client did
-   not send a handshake that matches the description below, the server
-
-
-
-Fette                   Expires December 15, 2011              [Page 32]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
-   MUST stop processing the client's handshake, and return an HTTP
-   response with an appropriate error code (such as 400 Bad Request).
+   not send a handshake that matches the description below, including
+   but not limited to any violations of the grammar (ABNF) specified for
+   the components of the handshake, the server MUST stop processing the
+   client's handshake, and return an HTTP response with an appropriate
+   error code (such as 400 Bad Request).
 
    1.  An HTTP/1.1 or higher GET request, including a "Request-URI"
        [RFC2616] that should be interpreted as a /resource name/
@@ -1802,8 +1814,8 @@ Internet-Draft           The WebSocket protocol                June 2011
 
    2.  A "Host" header containing the server's authority.
 
-   3.  A "Sec-WebSocket-Key" header with a base64-encoded value that,
-       when decoded, is 16 bytes in length.
+   3.  A "Sec-WebSocket-Key" header with a base64-encoded (see Section 4
+       of [RFC4648]) value that, when decoded, is 16 bytes in length.
 
    4.  A "Sec-WebSocket-Version" header, with a value of 8.
 
@@ -1829,6 +1841,14 @@ Internet-Draft           The WebSocket protocol                June 2011
    server MUST complete the following steps to accept the connection and
    send the server's opening handshake.
 
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 33]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
    1.  If the server supports encryption, perform a TLS handshake over
        the connection.  If this fails (e.g. the client indicated a host
        name in the extended client hello "server_name" extension that
@@ -1838,16 +1858,6 @@ Internet-Draft           The WebSocket protocol                June 2011
        [RFC5246]
 
    2.  Establish the following information:
-
-
-
-
-
-
-Fette                   Expires December 15, 2011              [Page 33]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
 
        /origin/
           The |Sec-WebSocket-Origin| header in the client's handshake
@@ -1887,28 +1897,34 @@ Internet-Draft           The WebSocket protocol                June 2011
           derived from the resource name given in the client's handshake
           from the Request-URI [RFC2616] of the GET method.  If the
           requested service is not available, the server MUST send an
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 34]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
           appropriate HTTP error code (such as 404 Not Found) and abort
           the WebSocket handshake.
 
        /subprotocol/
-          Either a single value or null, representing the subprotocol
-          the server is ready to use.  If the server supports multiple
-          subprotocols, then the value MUST be derived from the client's
-          handshake, specifically by selecting one of the values from
-          the "Sec-WebSocket-Protocol" field.  The absence of such a
-          field is equivalent to the null value.  The empty string is
-
-
-
-Fette                   Expires December 15, 2011              [Page 34]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
-          not the same as the null value for these purposes, and is not
-          a legal value for this field.  The ABNF for the value of this
-          header is (token), where the definitions of constructs and
-          rules are as given in [RFC2616].
+          Either a single value representing the subprotocol the server
+          is ready to use or null.  The value chosen MUST be derived
+          from the client's handshake, specifically by selecting one of
+          the values from the "Sec-WebSocket-Protocol" field that the
+          server is willing to use for this connection (if any).  If the
+          client's handshake did not contain such a header, or if the
+          server does not agree to any of the client's requested
+          subprotocols, the only acceptable value is null.  The absence
+          of such a field is equivalent to the null value (meaning that
+          if the server does not wish to agree to one of the suggested
+          subprotocols, it MUST NOT send back a |Sec-WebSocket-Protocol|
+          header in its response).  The empty string is not the same as
+          the null value for these purposes, and is not a legal value
+          for this field.  The ABNF for the value of this header is
+          (token), where the definitions of constructs and rules are as
+          given in [RFC2616].
 
        /extensions/
           A (possibly empty) list representing the protocol-level
@@ -1937,9 +1953,17 @@ Internet-Draft           The WebSocket protocol                June 2011
        4.  A "Sec-WebSocket-Accept" header.  The value of this header is
            constructed by concatenating /key/, defined above in
            Paragraph 2 of Section 5.2.2, with the string "258EAFA5-E914-
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 35]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
            47DA-95CA-C5AB0DC85B11", taking the SHA-1 hash of this
            concatenated value to obtain a 20-byte value, and base64-
-           encoding this 20-byte hash.
+           encoding (see Section 4 of [RFC4648]) this 20-byte hash.
 
            The ABNF of this header is defined as follows:
 
@@ -1953,14 +1977,6 @@ Internet-Draft           The WebSocket protocol                June 2011
            NOTE: As an example, if the value of the "Sec-WebSocket-Key"
            header in the client's handshake were
            "dGhlIHNhbXBsZSBub25jZQ==", the server would append the
-
-
-
-Fette                   Expires December 15, 2011              [Page 35]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
            string "258EAFA5-E914-47DA-95CA-C5AB0DC85B11" to form the
            string "dGhlIHNhbXBsZSBub25jZQ==258EAFA5-E914-47DA-95CA-
            C5AB0DC85B11".  The server would then take the SHA-1 hash of
@@ -1996,25 +2012,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Fette                   Expires December 15, 2011              [Page 36]
+Fette & Melnikov        Expires January 12, 2012               [Page 36]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 6.  Sending and Receiving Data
@@ -2068,9 +2068,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 37]
+Fette & Melnikov        Expires January 12, 2012               [Page 37]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    Received_ with type /type/ and data /data/.  If the frame is part of
@@ -2089,8 +2089,8 @@ Internet-Draft           The WebSocket protocol                June 2011
    "Application data" in a payload, MAY also modify the "Application
    data" (such as by compressing it).
 
-   Data frames received by a server from a client MUST be unmasked as
-   described in Section 4.3.
+   A server MUST remove masking for data frames received from a client
+   as described in Section 4.3.
 
 
 
@@ -2124,9 +2124,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 38]
+Fette & Melnikov        Expires January 12, 2012               [Page 38]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 7.  Closing the connection
@@ -2180,9 +2180,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 39]
+Fette & Melnikov        Expires January 12, 2012               [Page 39]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 7.1.4.  The WebSocket Connection is Closed
@@ -2236,9 +2236,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 40]
+Fette & Melnikov        Expires January 12, 2012               [Page 40]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    contained in the first Close control frame received by the
@@ -2292,9 +2292,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 41]
+Fette & Melnikov        Expires January 12, 2012               [Page 41]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 7.2.2.  Server-initiated closure
@@ -2348,9 +2348,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 42]
+Fette & Melnikov        Expires January 12, 2012               [Page 42]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    1003
@@ -2380,6 +2380,12 @@ Internet-Draft           The WebSocket protocol                June 2011
       connection was closed abnormally, e.g. without sending or
       receiving a Close control frame.
 
+   1007
+
+      1007 indicates that an endpoint is terminating the connection
+      because it has received data that was supposed to be UTF-8 (such
+      as in a text frame) that was in fact not valid UTF-8 [RFC3629].
+
 7.4.2.  Reserved Status Code Ranges
 
    0-999
@@ -2396,19 +2402,18 @@ Internet-Draft           The WebSocket protocol                June 2011
       Status codes in the range 2000-2999 are reserved for use by
       extensions.
 
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 43]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
    3000-3999
 
       Status codes in the range 3000-3999 MAY be used by libraries and
       frameworks.  The interpretation of these codes is undefined by
       this protocol.  End applications MUST NOT use status codes in this
-
-
-
-Fette                   Expires December 15, 2011              [Page 43]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
       range.
 
    4000-4999
@@ -2455,33 +2460,18 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-
-
-
-
-
-Fette                   Expires December 15, 2011              [Page 44]
+Fette & Melnikov        Expires January 12, 2012               [Page 44]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 8.  Error Handling
 
-8.1.  Handling Errors in UTF-8 from the Server
+8.1.  Handling Errors in UTF-8 Encoded Data
 
-   When a client is to interpret a byte stream as UTF-8 but finds that
-   the byte stream is not in fact a valid UTF-8 stream, then any bytes
-   or sequences of bytes that are not valid UTF-8 sequences MUST be
-   interpreted as a U+FFFD REPLACEMENT CHARACTER.
-
-8.2.  Handling Errors in UTF-8 from the Client
-
-   When a server is to interpret a byte stream as UTF-8 but finds that
-   the byte stream is not in fact a valid UTF-8 stream, behavior is
-   undefined.  A server could close the connection, convert invalid byte
-   sequences to U+FFFD REPLACEMENT CHARACTERs, store the data verbatim,
-   or perform application-specific processing.  Subprotocols layered on
-   the WebSocket protocol might define specific behavior for servers.
+   When an endpoint is to interpret a byte stream as UTF-8 but finds
+   that the byte stream is not in fact a valid UTF-8 stream, that
+   endpoint MUST _Fail the WebSocket Connection_.
 
 
 
@@ -2516,9 +2506,19 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 45]
+
+
+
+
+
+
+
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 45]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 9.  Extensions
@@ -2559,9 +2559,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
          Sec-WebSocket-Extensions: foo, bar; baz=2
 
-   Any extension-token used MUST either be a registered token
-   (registration TBD), or have a prefix of "x-" to indicate a private-
-   use token.  The parameters supplied with any given extension MUST be
+   Any extension-token used MUST either be a registered token (see
+   Section 11.6), or have a prefix of "x-" to indicate a private-use
+   token.  The parameters supplied with any given extension MUST be
    defined for that extension.  Note that the client is only offering to
    use any advertised extensions, and MUST NOT use them unless the
    server indicates that it wishes to use the extension.
@@ -2572,9 +2572,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 46]
+Fette & Melnikov        Expires January 12, 2012               [Page 46]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    interpretation is that the headers listed by the client in its
@@ -2628,9 +2628,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 47]
+Fette & Melnikov        Expires January 12, 2012               [Page 47]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    Senders MUST NOT delay the transmission of any portion of a WebSocket
@@ -2684,9 +2684,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 48]
+Fette & Melnikov        Expires January 12, 2012               [Page 48]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 10.  Security Considerations
@@ -2740,9 +2740,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 49]
+Fette & Melnikov        Expires January 12, 2012               [Page 49]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    server as a response to that request.  For instance, an attacker
@@ -2756,12 +2756,6 @@ Internet-Draft           The WebSocket protocol                June 2011
    and thus lessen the probability of an attacker being able to
    construct a frame that can be misinterpreted by a proxy as a non-
    WebSocket request.
-
-
-   As mentioned in Section 8.2, servers must be extremely cautious
-   interpreting invalid UTF-8 data from the client.  A naive UTF-8
-   parsing implementation can result in buffer overflows in the case of
-   invalid input data.
 
 
    For connections using TLS (wss: URIs), the amount of benefit provided
@@ -2796,9 +2790,15 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 50]
+
+
+
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 50]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 11.  IANA Considerations
@@ -2844,7 +2844,7 @@ Internet-Draft           The WebSocket protocol                June 2011
       WebSocket protocol.
 
    Interoperability considerations.
-      None.
+      Use of WebSocket requires use of HTTP version 1.1 or higher.
 
 
 
@@ -2852,9 +2852,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 51]
+Fette & Melnikov        Expires January 12, 2012               [Page 51]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    Security considerations.
@@ -2908,9 +2908,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 52]
+Fette & Melnikov        Expires January 12, 2012               [Page 52]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
       encoding the characters as UTF-8 and then replacing the
@@ -2921,7 +2921,7 @@ Internet-Draft           The WebSocket protocol                June 2011
       WebSocket protocol over TLS.
 
    Interoperability considerations.
-      None.
+      Use of WebSocket requires use of HTTP version 1.1 or higher.
 
    Security considerations.
       See "Security considerations" section above.
@@ -2964,9 +2964,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 53]
+Fette & Melnikov        Expires January 12, 2012               [Page 53]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    Header field name
@@ -3020,9 +3020,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 54]
+Fette & Melnikov        Expires January 12, 2012               [Page 54]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    Related information
@@ -3061,12 +3061,12 @@ Internet-Draft           The WebSocket protocol                June 2011
       A list of extension identifiers with which this extension is known
       to be incompatible.
 
-   WebSocket Extension names are to be subject to First Come First Serve
-   as per RFC5226 [RFC5226], with the exception of WebSocket Extension
-   names whose Extension Identifier matches a private-use-token as
-   defined in Section 9.1 (values beginning with "x-").  These Extension
-   Identifiers matching private-use-token are reserved for Experimental
-   Use as per RFC5226 [RFC5226].
+   WebSocket Extension names are to be subject to "First Come First
+   Served" IANA registration policy [RFC5226], with the exception of
+   WebSocket Extension names whose Extension Identifier matches a
+   private-use-token as defined in Section 9.1 (values beginning with
+   "x-").  These Extension Identifiers matching private-use-token are
+   reserved for Experimental Use as per RFC5226 [RFC5226].
 
    IANA is asked to add an initial value to the registry (there are no
    known incompatible extensions for this initial entry):
@@ -3076,9 +3076,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 55]
+Fette & Melnikov        Expires January 12, 2012               [Page 55]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    Extension Identifier |  Extension Common Name |  Extension Definition
@@ -3132,9 +3132,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 56]
+Fette & Melnikov        Expires January 12, 2012               [Page 56]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    Author/Change controller
@@ -3188,9 +3188,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 57]
+Fette & Melnikov        Expires January 12, 2012               [Page 57]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    accordance with the principles set out in RFC 5226 [RFC5226].
@@ -3202,9 +3202,8 @@ Internet-Draft           The WebSocket protocol                June 2011
       The identifier of the subprotocol, as will be used in the Sec-
       WebSocket-Protocol header registered in Section 11.9 of this
       specification.  The value must conform to the requirements given
-      in Paragraph 10 of Paragraph 4 of Section 5.1 of this
-      specification, namely the value must be a token as defined by RFC
-      2616 [RFC2616].
+      in Paragraph 10 of Section 5.1 of this specification, namely the
+      value must be a token as defined by RFC 2616 [RFC2616].
 
    Subprotocol Common Name
       The name of the subprotocol, as the subprotocol is generally
@@ -3214,8 +3213,8 @@ Internet-Draft           The WebSocket protocol                June 2011
       A reference to the document in which the subprotocol being used
       with the WebSocket protocol is defined.
 
-   WebSocket Subprotocol names are to be subject to First Come First
-   Serve as per RFC5226 [RFC5226].
+   WebSocket Subprotocol names are to be subject to "First Come First
+   Served" IANA registration policy [RFC5226].
 
 11.11.  Sec-WebSocket-Version
 
@@ -3241,15 +3240,15 @@ Internet-Draft           The WebSocket protocol                June 2011
       This header field is only used for WebSocket opening handshake.
 
    The |Sec-WebSocket-Version| header is used in the WebSocket opening
-
-
-
-Fette                   Expires December 15, 2011              [Page 58]
-
-Internet-Draft           The WebSocket protocol                June 2011
-
-
    handshake.  It is sent from the client to the server to indicate the
+
+
+
+Fette & Melnikov        Expires January 12, 2012               [Page 58]
+
+Internet-Draft           The WebSocket protocol                July 2011
+
+
    protocol version of the connection.  This enables servers to
    correctly interpret the opening handshake and subsequent data being
    sent from the data, and close the connection if the server cannot
@@ -3272,8 +3271,11 @@ Internet-Draft           The WebSocket protocol                June 2011
    Reference
       The RFC requesting a new version number.
 
-   WebSocket Version Numbers are to be subject to RFC Required as per
-   RFC5226 [RFC5226].
+   WebSocket Version Numbers are to be subject to "IETF Review" IANA
+   registration policy [RFC5226].  In order to improve interoperability
+   with intermediate versions published in Internet Drafts, version
+   numbers associated with such drafts might be registered in this
+   registry.
 
    IANA is asked to add initial values to the registry, with suggested
    numerical values as these have been used in past versions of this
@@ -3298,11 +3300,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-
-
-Fette                   Expires December 15, 2011              [Page 59]
+Fette & Melnikov        Expires January 12, 2012               [Page 59]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
       Version Number  | Reference
@@ -3356,25 +3356,25 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 60]
+Fette & Melnikov        Expires January 12, 2012               [Page 60]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    registration requirements depending on their range.  Unless otherwise
-   specified, requests are subject to Standards Action as per RFC5226
-   [RFC5226].  Requests for status codes for use by this protocol or
-   subsequent versions are subject to Standards Action and should be
-   granted status codes in the range 1000-1999.  Requests for status
-   codes for use by extensions are subject to Specification Required and
-   should be granted Status Codes in the range 2000-2999.  Requests for
-   status codes for use by libraries and frameworks are subject to First
-   Come First Served and should be granted in the range 3000-3999.  The
-   range of status codes from 4000-4999 is designated for Private Use by
-   application code.  Requests should indicate whether they are
-   requesting status codes for use by the WebSocket protocol (or a
-   future version of the protocol), by extensions, or by libraries and
-   frameworks.
+   specified, requests are subject to "Standards Action" IANA
+   registration policy [RFC5226].  Requests for status codes for use by
+   this protocol or subsequent versions are subject to Standards Action
+   and should be granted status codes in the range 1000-1999.  Requests
+   for status codes for use by extensions are subject to Specification
+   Required and should be granted Status Codes in the range 2000-2999.
+   Requests for status codes for use by libraries and frameworks are
+   subject to First Come First Served and should be granted in the range
+   3000-3999.  The range of status codes from 4000-4999 is designated
+   for Private Use by application code.  Requests should indicate
+   whether they are requesting status codes for use by the WebSocket
+   protocol (or a future version of the protocol), by extensions, or by
+   libraries and frameworks.
 
    IANA is asked to add initial values to the registry, with suggested
    numerical values as these have been used in past versions of this
@@ -3396,6 +3396,8 @@ Internet-Draft           The WebSocket protocol                June 2011
     -+------------+-----------------+---------------+-----------|
      | 1006       | Abnormal Closure| hybi@ietf.org | RFC XXXX  |
     -+------------+-----------------+---------------+-----------|
+     | 1007       | Invalid UTF-8   | hybi@ietf.org | RFC XXXX  |
+    -+------------+-----------------+---------------+-----------|
 
 11.14.  WebSocket Opcode Registry
 
@@ -3410,11 +3412,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-
-
-Fette                   Expires December 15, 2011              [Page 61]
+Fette & Melnikov        Expires January 12, 2012               [Page 61]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
    Opcode
@@ -3428,8 +3428,8 @@ Internet-Draft           The WebSocket protocol                June 2011
    Reference
       The specification requesting the opcode.
 
-   WebSocket Opcode numbers are subject to Standards Action as per
-   RFC5226 [RFC5226].
+   WebSocket Opcode numbers are subject to "Standards Action" IANA
+   registration policy [RFC5226].
 
    IANA is asked to add initial values to the registry, with suggested
    numerical values as these have been used in past versions of this
@@ -3460,17 +3460,17 @@ Internet-Draft           The WebSocket protocol                June 2011
    These bits are reserved for future versions or extensions of this
    specification.
 
-   WebSocket Framing Header Bits assignments are subject to Standards
-   Action per RFC 5226 [RFC5226].
+   WebSocket Framing Header Bits assignments are subject to "Standards
+   Action" IANA registration policy [RFC5226].
 
 
 
 
 
 
-Fette                   Expires December 15, 2011              [Page 62]
+Fette & Melnikov        Expires January 12, 2012               [Page 62]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 12.  Using the WebSocket protocol from Other Specifications
@@ -3524,9 +3524,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 63]
+Fette & Melnikov        Expires January 12, 2012               [Page 63]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 13.  Acknowledgements
@@ -3580,9 +3580,9 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 64]
+Fette & Melnikov        Expires January 12, 2012               [Page 64]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
 14.  References
@@ -3598,6 +3598,10 @@ Internet-Draft           The WebSocket protocol                June 2011
               National Institute of Standards and Technology, "Secure
               Hash Standard", FIPS PUB 180-2, August 2002, <http://
               csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf>.
+
+   [RFC1928]  Leech, M., Ganis, M., Lee, Y., Kuris, R., Koblas, D., and
+              L. Jones, "SOCKS Protocol Version 5", RFC 1928,
+              March 1996.
 
    [RFC1951]  Deutsch, P., "DEFLATE Compressed Data Format Specification
               version 1.3", RFC 1951, May 1996.
@@ -3618,9 +3622,6 @@ Internet-Draft           The WebSocket protocol                June 2011
               "Internationalizing Domain Names in Applications (IDNA)",
               RFC 3490, March 2003.
 
-   [RFC3548]  Josefsson, S., "The Base16, Base32, and Base64 Data
-              Encodings", RFC 3548, July 2003.
-
    [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
               10646", STD 63, RFC 3629, November 2003.
 
@@ -3632,15 +3633,15 @@ Internet-Draft           The WebSocket protocol                June 2011
               Resource Identifier (URI): Generic Syntax", STD 66,
               RFC 3986, January 2005.
 
-   [RFC3987]  Duerst, M. and M. Suignard, "Internationalized Resource
 
 
 
-Fette                   Expires December 15, 2011              [Page 65]
+Fette & Melnikov        Expires January 12, 2012               [Page 65]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
+   [RFC3987]  Duerst, M. and M. Suignard, "Internationalized Resource
               Identifiers (IRIs)", RFC 3987, January 2005.
 
    [RFC4086]  Eastlake, D., Schiller, J., and S. Crocker, "Randomness
@@ -3662,20 +3663,18 @@ Internet-Draft           The WebSocket protocol                June 2011
    [RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
               Specifications: ABNF", STD 68, RFC 5234, January 2008.
 
+   [I-D.ietf-websec-origin]
+              Barth, A., "The Web Origin Concept",
+              draft-ietf-websec-origin-00 (work in progress),
+              December 2010.
+
 14.2.  Informative References
 
    [WSAPI]    Hickson, I., "The Web Sockets API", August 2010,
               <http://dev.w3.org/html5/websockets/>.
 
-   [I-D.ietf-httpstate-cookie]
-              Barth, A., "HTTP State Management Mechanism",
-              draft-ietf-httpstate-cookie-20 (work in progress),
-              December 2010.
-
-   [I-D.ietf-websec-origin]
-              Barth, A., "The Web Origin Concept",
-              draft-ietf-websec-origin-00 (work in progress),
-              December 2010.
+   [RFC6265]  Barth, A., "HTTP State Management Mechanism", RFC 6265,
+              April 2011.
 
    [RFC1950]  Deutsch, L. and J-L. Gailly, "ZLIB Compressed Data Format
               Specification version 3.3", RFC 1950, May 1996.
@@ -3689,15 +3688,15 @@ Internet-Draft           The WebSocket protocol                June 2011
               April 2011.
 
    [W3C.REC-wsc-ui-20100812]
+              Roessler, T. and A. Saldhana, "Web Security Context: User
 
 
 
-Fette                   Expires December 15, 2011              [Page 66]
+Fette & Melnikov        Expires January 12, 2012               [Page 66]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
-              Saldhana, A. and T. Roessler, "Web Security Context: User
               Interface Guidelines", World Wide Web Consortium
               Recommendation REC-wsc-ui-20100812, August 2010,
               <http://www.w3.org/TR/2010/REC-wsc-ui-20100812>.
@@ -3748,12 +3747,13 @@ Internet-Draft           The WebSocket protocol                June 2011
 
 
 
-Fette                   Expires December 15, 2011              [Page 67]
+
+Fette & Melnikov        Expires January 12, 2012               [Page 67]
 
-Internet-Draft           The WebSocket protocol                June 2011
+Internet-Draft           The WebSocket protocol                July 2011
 
 
-Author's Address
+Authors' Addresses
 
    Ian Fette
    Google, Inc.
@@ -3762,6 +3762,14 @@ Author's Address
    URI:   http://www.ianfette.com/
 
 
+   Alexey Melnikov
+   Isode Ltd
+   5 Castle Business Village
+   36 Station Road
+   Hampton, Middlesex  TW12 2BX
+   UK
+
+   Email: Alexey.Melnikov@isode.com
 
 
 
@@ -3796,13 +3804,5 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-Fette                   Expires December 15, 2011              [Page 68]
+Fette & Melnikov        Expires January 12, 2012               [Page 68]
 
