@@ -3,12 +3,12 @@
 
 Network Working Group                                         I. Hickson
 Internet-Draft                                              Google, Inc.
-Intended status: Standards Track                             May 6, 2010
-Expires: November 7, 2010
+Intended status: Standards Track                            May 23, 2010
+Expires: November 24, 2010
 
 
                          The WebSocket protocol
-                  draft-hixie-thewebsocketprotocol-76
+                draft-ietf-hybi-thewebsocketprotocol-00
 
 Abstract
 
@@ -52,7 +52,7 @@ Abstract
 
 
 
-Hickson                 Expires November 7, 2010                [Page 1]
+Hickson                 Expires November 24, 2010               [Page 1]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -80,7 +80,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 7, 2010.
+   This Internet-Draft will expire on November 24, 2010.
 
 Copyright Notice
 
@@ -108,7 +108,7 @@ Copyright Notice
 
 
 
-Hickson                 Expires November 7, 2010                [Page 2]
+Hickson                 Expires November 24, 2010               [Page 2]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -164,7 +164,7 @@ Table of Contents
 
 
 
-Hickson                 Expires November 7, 2010                [Page 3]
+Hickson                 Expires November 24, 2010               [Page 3]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -220,7 +220,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010                [Page 4]
+Hickson                 Expires November 24, 2010               [Page 4]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -276,7 +276,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010                [Page 5]
+Hickson                 Expires November 24, 2010               [Page 5]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -332,7 +332,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010                [Page 6]
+Hickson                 Expires November 24, 2010               [Page 6]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -388,7 +388,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010                [Page 7]
+Hickson                 Expires November 24, 2010               [Page 7]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -444,7 +444,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010                [Page 8]
+Hickson                 Expires November 24, 2010               [Page 8]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -500,7 +500,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010                [Page 9]
+Hickson                 Expires November 24, 2010               [Page 9]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -556,7 +556,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 10]
+Hickson                 Expires November 24, 2010              [Page 10]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -612,7 +612,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 11]
+Hickson                 Expires November 24, 2010              [Page 11]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -668,7 +668,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 12]
+Hickson                 Expires November 24, 2010              [Page 12]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -724,7 +724,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 13]
+Hickson                 Expires November 24, 2010              [Page 13]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -780,7 +780,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 14]
+Hickson                 Expires November 24, 2010              [Page 14]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -836,7 +836,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 15]
+Hickson                 Expires November 24, 2010              [Page 15]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -892,7 +892,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 16]
+Hickson                 Expires November 24, 2010              [Page 16]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -948,7 +948,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 17]
+Hickson                 Expires November 24, 2010              [Page 17]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1004,7 +1004,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 18]
+Hickson                 Expires November 24, 2010              [Page 18]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1060,7 +1060,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 19]
+Hickson                 Expires November 24, 2010              [Page 19]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1116,7 +1116,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 20]
+Hickson                 Expires November 24, 2010              [Page 20]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1172,7 +1172,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 21]
+Hickson                 Expires November 24, 2010              [Page 21]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1228,7 +1228,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 22]
+Hickson                 Expires November 24, 2010              [Page 22]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1284,7 +1284,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 23]
+Hickson                 Expires November 24, 2010              [Page 23]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1340,7 +1340,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 24]
+Hickson                 Expires November 24, 2010              [Page 24]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1396,7 +1396,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 25]
+Hickson                 Expires November 24, 2010              [Page 25]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1452,7 +1452,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 26]
+Hickson                 Expires November 24, 2010              [Page 26]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1508,7 +1508,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 27]
+Hickson                 Expires November 24, 2010              [Page 27]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1564,7 +1564,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 28]
+Hickson                 Expires November 24, 2010              [Page 28]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1620,7 +1620,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 29]
+Hickson                 Expires November 24, 2010              [Page 29]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1676,7 +1676,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 30]
+Hickson                 Expires November 24, 2010              [Page 30]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1732,7 +1732,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 31]
+Hickson                 Expires November 24, 2010              [Page 31]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1788,7 +1788,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 32]
+Hickson                 Expires November 24, 2010              [Page 32]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1844,7 +1844,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 33]
+Hickson                 Expires November 24, 2010              [Page 33]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1900,7 +1900,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 34]
+Hickson                 Expires November 24, 2010              [Page 34]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1956,7 +1956,7 @@ Internet-Draft           The WebSocket protocol                 May 2010
 
 
 
-Hickson                 Expires November 7, 2010               [Page 35]
+Hickson                 Expires November 24, 2010              [Page 35]
 
 Internet-Draft           The WebSocket protocol                 May 2010
 
@@ -1971,1110 +1971,4 @@ Internet-Draft           The WebSocket protocol                 May 2010
            null value for these purposes.
 
         /key_1/
-           The value of the "Sec-WebSocket-Key1" field in the client's
-           handshake.
-
-        /key_2/
-           The value of the "Sec-WebSocket-Key2" field in the client's
-           handshake.
-
-        /key_3/
-           The eight random bytes sent after the first 0x0D 0x0A 0x0D
-           0x0A sequence in the client's handshake.
-
-   3.   Let /location/ be the string that results from constructing a
-        WebSocket URL from /host/, /port/, /resource name/, and /secure
-        flag/.
-
-   4.   Let /key-number_1/ be the digits (characters in the range U+0030
-        DIGIT ZERO (0) to U+0039 DIGIT NINE (9)) in /key_1/, interpreted
-        as a base ten integer, ignoring all other characters in /key_1/.
-
-        Let /key-number_2/ be the digits (characters in the range U+0030
-        DIGIT ZERO (0) to U+0039 DIGIT NINE (9)) in /key_2/, interpreted
-        as a base ten integer, ignoring all other characters in /key_2/.
-
-           EXAMPLE: For example, assume that the client handshake was:
-
-              GET / HTTP/1.1
-              Connection: Upgrade
-              Host: example.com
-              Upgrade: WebSocket
-              Sec-WebSocket-Key1: 3e6b263  4 17 80
-              Origin: http://example.com
-              Sec-WebSocket-Key2: 17  9 G`ZD9   2 2b 7X 3 /r90
-
-              WjN}|M(6
-
-           The /key-number_1/ would be the number 3,626,341,780, and the
-           /key-number_2/ would be the number 1,799,227,390.
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 36]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-           In this example, incidentally, /key_3/ is "WjN}|M(6", or 0x57
-           0x6A 0x4E 0x7D 0x7C 0x4D 0x28 0x36.
-
-   5.   Let /spaces_1/ be the number of U+0020 SPACE characters in
-        /key_1/.
-
-        Let /spaces_2/ be the number of U+0020 SPACE characters in
-        /key_2/.
-
-        If either /spaces_1/ or /spaces_2/ is zero, then abort the
-        WebSocket connection.  This is a symptom of a cross-protocol
-        attack.
-
-        EXAMPLE: In the example above, /spaces_1/ would be 4 and
-        /spaces_2/ would be 10.
-
-   6.   If /key-number_1/ is not an integral multiple of /spaces_1/,
-        then abort the WebSocket connection.
-
-        If /key-number_2/ is not an integral multiple of /spaces_2/,
-        then abort the WebSocket connection.
-
-        NOTE: This can only happen if the client is not a conforming
-        WebSocket client.
-
-   7.   Let /part_1/ be /key-number_1/ divided by /spaces_1/.
-
-        Let /part_2/ be /key-number_2/ divided by /spaces_2/.
-
-        EXAMPLE: In the example above, /part_1/ would be 906,585,445 and
-        /part_2/ would be 179,922,739.
-
-   8.   Let /challenge/ be the concatenation of /part_1/, expressed as a
-        big-endian 32 bit integer, /part_2/, expressed as a big-endian
-        32 bit integer, and the eight bytes of /key_3/ in the order they
-        were sent on the wire.
-
-        EXAMPLE: In the example above, this would be the 16 bytes 0x36
-        0x09 0x65 0x65 0x0A 0xB9 0x67 0x33 0x57 0x6A 0x4E 0x7D 0x7C 0x4D
-        0x28 0x36.
-
-   9.   Let /response/ be the MD5 fingerprint of /challenge/ as a big-
-        endian 128 bit string.  [RFC1321]
-
-        EXAMPLE: In the example above, this would be the 16 bytes 0x6E
-        0x60 0x39 0x65 0x42 0x6B 0x39 0x7A 0x24 0x52 0x38 0x70 0x4F 0x74
-        0x56 0x62, or "n`9eBk9z$R8pOtVb" in ASCII.
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 37]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-   10.  Send the following line, terminated by the two characters U+000D
-        CARRIAGE RETURN and U+000A LINE FEED (CRLF) and encoded as
-        UTF-8, to the client:
-
-           HTTP/1.1 101 WebSocket Protocol Handshake
-
-        This line may be sent differently if necessary, but must match
-        the Status-Line production defined in the HTTP specification,
-        with the Status-Code having the value 101.
-
-   11.  Send the following fields to the client.  Each field must be
-        sent as a line consisting of the field name, which must be an
-        ASCII case-insensitive match for the field name in the list
-        below, followed by a U+003A COLON character (:) and a U+0020
-        SPACE character, followed by the field value as specified in the
-        list below, followed by the two characters U+000D CARRIAGE
-        RETURN and U+000A LINE FEED (CRLF).  The lines must be encoded
-        as UTF-8.  The lines may be sent in any order.
-
-        |Upgrade|
-           The value must be the string "WebSocket".
-
-        |Connection|
-           The value must be the string "Upgrade".
-
-        |Sec-WebSocket-Location|
-           The value must be /location/
-
-        |Sec-WebSocket-Origin|
-           The value must be /origin/
-
-        |Sec-WebSocket-Protocol|
-           This field must be included if /subprotocol/ is not null, and
-           must not be included if /subprotocol/ is null.
-
-           If included, the value must be /subprotocol/
-
-        Optionally, include "Set-Cookie", "Set-Cookie2", or other
-        cookie-related fields, with values equal to the values that
-        would be used for the identically named HTTP headers.  [RFC2109]
-        [RFC2965]
-
-   12.  Send two bytes 0x0D 0x0A (ASCII CRLF).
-
-   13.  Send /response/.
-
-   This completes the server's handshake.  If the server finishes these
-   steps without aborting the WebSocket connection, and if the client
-
-
-
-Hickson                 Expires November 7, 2010               [Page 38]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-   does not then fail the connection, then the connection is established
-   and the server may begin and receiving sending data, as described in
-   the next section.
-
-5.3.  Data framing
-
-   The server must run through the following steps to process the bytes
-   sent by the client.  If at any point during these steps a read is
-   attempted but fails because the WebSocket connection is closed, then
-   abort.
-
-   1.  _Frame_: Read a byte from the client.  Let /type/ be that byte.
-
-   2.  If the most significant bit of /type/ is not set, then run the
-       following steps:
-
-       1.  If /type/ is not a 0x00 byte, then the server may abort these
-           steps and either immediately disconnect from the client or
-           set the /client terminated/ flag.
-
-       2.  Let /raw data/ be an empty byte array.
-
-       3.  _Data_: Read a byte, let /b/ be that byte.
-
-       4.  If /b/ is not 0xFF, then append /b/ to /raw data/ and return
-           to the previous step (labeled _data_).
-
-       5.  If /type/ was 0x00, interpret /raw data/ as a UTF-8 string,
-           and apply whatever server-specific processing is to occur for
-           the resulting string (the message from the client).
-
-       Otherwise, the most significant bit of /type/ is set.  Run the
-       following steps.
-
-       6.   If /type/ is not a 0xFF byte, then the server may abort
-            these steps and either immediately disconnect from the
-            client or set the /client terminated/ flag.
-
-       7.   Let /length/ be zero.
-
-       8.   _Length_: Read a byte, let /b/ be that byte.
-
-       9.   If /b/ is not a 0x00 byte, then run these substeps:
-
-            1.  The server may abort these steps and either immediately
-                disconnect from the client or set the /client
-                terminated/ flag.
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 39]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-            2.  Let /b_v/ be an integer corresponding to the low 7 bits
-                of /b/ (the value you would get by _and_ing /b/ with
-                0x7F).
-
-            3.  Multiply /length/ by 128, add /b_v/ to that result, and
-                store the final result in /length/.
-
-            4.  If the high-order bit of /b/ is set (i.e. if /b/ _and_ed
-                with 0x80 returns 0x80), then return to the step above
-                labeled _length_.
-
-            5.  Read /length/ bytes.
-
-                !!!  WARNING: It is possible for a malicious client to
-                send frames with lengths greater than 2**(31) or 2**(32)
-                bytes, overflowing a signed or unsigned 32bit integer.
-                Servers may therefore impose implementation-specific
-                limits on the lengths of invalid frames that they will
-                skip, if they support skipping such frames at all.  If a
-                server cannot correctly skip past a long frame, then the
-                server must abort these steps (discarding all future
-                data), and should either immediately disconnect from the
-                client or set the /client terminated/ flag.
-
-            6.  Discard the read bytes.
-
-       10.  If /type/ is 0xFF and /length/ is 0, then set the /client
-            terminated/ flag and abort these steps.  All further data
-            sent by the client should be discarded.
-
-   3.  Return to the step labeled _frame_.
-
-
-   The server must run through the following steps to send strings to
-   the client:
-
-   1.  Send a 0x00 byte to the client to indicate the start of a string.
-
-   2.  Encode /data/ using UTF-8 and send the resulting byte stream to
-       the client.
-
-   3.  Send a 0xFF byte to the client to indicate the end of the
-       message.
-
-
-   At any time, the server may decide to terminate the WebSocket
-   connection by running through the following steps:
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 40]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-   1.  Send a 0xFF byte and a 0x00 byte to the client to indicate the
-       start of the closing handshake.
-
-   2.  Wait until the /client terminated/ flag has been set, or until a
-       server-defined timeout expires.
-
-   3.  Close the WebSocket connection.
-
-   Once these steps have started, the server must not send any further
-   data to the server.  The 0xFF 0x00 bytes indicate the end of the
-   server's data, and further bytes will be discarded by the client.
-
-5.4.  Handling errors in UTF-8 from the client
-
-   When a server is to interpret a byte stream as UTF-8 but finds that
-   the byte stream is not in fact a valid UTF-8 stream, behavior is
-   undefined.  A server could close the connection, convert invalid byte
-   sequences to U+FFFD REPLACEMENT CHARACTERs, store the data verbatim,
-   or perform application-specific processing.  Subprotocols layered on
-   the WebSocket protocol might define specific behavior for servers.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 41]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-6.  Closing the connection
-
-6.1.  Client-initiated closure
-
-   Certain algorithms require the user agent to *fail the WebSocket
-   connection*.  To do so, the user agent must close the WebSocket
-   connection, and may report the problem to the user (which would be
-   especially useful for developers).
-
-   Except as indicated above or as specified by the application layer
-   (e.g. a script using the WebSocket API), user agents should not close
-   the connection.
-
-   User agents must not convey any failure information to scripts in a
-   way that would allow a script to distinguish the following
-   situations:
-
-   o  A server whose host name could not be resolved.
-
-   o  A server to which packets could not successfully be routed.
-
-   o  A server that refused the connection on the specified port.
-
-   o  A server that did not complete the opening handshake (e.g. because
-      it was not a WebSocket server).
-
-   o  A WebSocket server that sent a correct opening handshake, but that
-      specified options that caused the client to drop the connection
-      (e.g. the server specified an origin that differed from the
-      script's).
-
-   o  A WebSocket server that abruptly closed the connection after
-      successfully completing the opening handshake.
-
-6.2.  Server-initiated closure
-
-   Certain algorithms require or recommend that the server *abort the
-   WebSocket connection* during the opening handshake.  To do so, the
-   server must simply close the WebSocket connection.
-
-6.3.  Closure
-
-   To *close the WebSocket connection*, the user agent or server must
-   close the TCP connection, using whatever mechanism possible (e.g.
-   either the TCP RST or FIN mechanisms).  When a user agent notices
-   that the server has closed its connection, it must immediately close
-   its side of the connection also.  Whether the user agent or the
-   server closes the connection first, it is said that the *WebSocket
-
-
-
-Hickson                 Expires November 7, 2010               [Page 42]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-   connection is closed*.  If the connection was closed after the client
-   finished the WebSocket closing handshake, then the WebSocket
-   connection is said to have been closed _cleanly_.
-
-   Servers may close the WebSocket connection whenever desired.  User
-   agents should not close the WebSocket connection arbitrarily.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 43]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-7.  Security considerations
-
-   While this protocol is intended to be used by scripts in Web pages,
-   it can also be used directly by hosts.  Such hosts are acting on
-   their own behalf, and can therefore send fake "Origin" fields,
-   misleading the server.  Servers should therefore be careful about
-   assuming that they are talking directly to scripts from known
-   origins, and must consider that they might be accessed in unexpected
-   ways.  In particular, a server should not trust that any input is
-   valid.
-
-   EXAMPLE: For example, if the server uses input as part of SQL
-   queries, all input text should be escaped before being passed to the
-   SQL server, lest the server be susceptible to SQL injection.
-
-
-   Servers that are not intended to process input from any Web page but
-   only for certain sites should verify the "Origin" field is an origin
-   they expect, and should only respond with the corresponding "Sec-
-   WebSocket-Origin" if it is an accepted origin.  Servers that only
-   accept input from one origin can just send back that value in the
-   "Sec-WebSocket-Origin" field, without bothering to check the client's
-   value.
-
-
-   If at any time a server is faced with data that it does not
-   understand, or that violates some criteria by which the server
-   determines safety of input, or when the server sees a handshake that
-   does not correspond to the values the server is expecting (e.g.
-   incorrect path or origin), the server should just disconnect.  It is
-   always safe to disconnect.
-
-
-   The biggest security risk when sending text data using this protocol
-   is sending data using the wrong encoding.  If an attacker can trick
-   the server into sending data encoded as ISO-8859-1 verbatim (for
-   instance), rather than encoded as UTF-8, then the attacker could
-   inject arbitrary frames into the data stream.
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 44]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-8.  IANA considerations
-
-8.1.  Registration of ws: scheme
-
-   A |ws:| URL identifies a WebSocket server and resource name.
-
-   URI scheme name.
-      ws
-
-   Status.
-      Permanent.
-
-   URI scheme syntax.
-      In ABNF terms using the terminals from the URI specifications:
-      [RFC5234] [RFC3986]
-
-           "ws" ":" hier-part [ "?" query ]
-
-      The path and query components form the resource name sent to the
-      server to identify the kind of service desired.  Other components
-      have the meanings described in RFC3986.
-
-   URI scheme semantics.
-      The only operation for this scheme is to open a connection using
-      the WebSocket protocol.
-
-   Encoding considerations.
-      Characters in the host component that are excluded by the syntax
-      defined above must be converted from Unicode to ASCII by applying
-      the IDNA ToASCII algorithm to the Unicode host name, with both the
-      AllowUnassigned and UseSTD3ASCIIRules flags set, and using the
-      result of this algorithm as the host in the URI.  [RFC3490]
-
-      Characters in other components that are excluded by the syntax
-      defined above must be converted from Unicode to ASCII by first
-      encoding the characters as UTF-8 and then replacing the
-      corresponding bytes using their percent-encoded form as defined in
-      the URI and IRI specification.  [RFC3986] [RFC3987]
-
-   Applications/protocols that use this URI scheme name.
-      WebSocket protocol.
-
-   Interoperability considerations.
-      None.
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 45]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-   Security considerations.
-      See "Security considerations" section above.
-
-   Contact.
-      Ian Hickson <ian@hixie.ch>
-
-   Author/Change controller.
-      Ian Hickson <ian@hixie.ch>
-
-   References.
-      This document.
-
-8.2.  Registration of wss: scheme
-
-   A |wss:| URL identifies a WebSocket server and resource name, and
-   indicates that traffic over that connection is to be encrypted.
-
-   URI scheme name.
-      wss
-
-   Status.
-      Permanent.
-
-   URI scheme syntax.
-      In ABNF terms using the terminals from the URI specifications:
-      [RFC5234] [RFC3986]
-
-           "wss" ":" hier-part [ "?" query ]
-
-      The path and query components form the resource name sent to the
-      server to identify the kind of service desired.  Other components
-      have the meanings described in RFC3986.
-
-   URI scheme semantics.
-      The only operation for this scheme is to open a connection using
-      the WebSocket protocol, encrypted using TLS.
-
-   Encoding considerations.
-      Characters in the host component that are excluded by the syntax
-      defined above must be converted from Unicode to ASCII by applying
-      the IDNA ToASCII algorithm to the Unicode host name, with both the
-      AllowUnassigned and UseSTD3ASCIIRules flags set, and using the
-      result of this algorithm as the host in the URI.  [RFC3490]
-
-      Characters in other components that are excluded by the syntax
-      defined above must be converted from Unicode to ASCII by first
-      encoding the characters as UTF-8 and then replacing the
-      corresponding bytes using their percent-encoded form as defined in
-
-
-
-Hickson                 Expires November 7, 2010               [Page 46]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-      the URI and IRI specification.  [RFC3986] [RFC3987]
-
-   Applications/protocols that use this URI scheme name.
-      WebSocket protocol over TLS.
-
-   Interoperability considerations.
-      None.
-
-   Security considerations.
-      See "Security considerations" section above.
-
-   Contact.
-      Ian Hickson <ian@hixie.ch>
-
-   Author/Change controller.
-      Ian Hickson <ian@hixie.ch>
-
-   References.
-      This document.
-
-8.3.  Registration of the "WebSocket" HTTP Upgrade keyword
-
-   Name of token.
-      WebSocket
-
-   Author/Change controller.
-      Ian Hickson <ian@hixie.ch>
-
-   Contact.
-      Ian Hickson <ian@hixie.ch>
-
-   References.
-      This document.
-
-8.4.  Sec-WebSocket-Key1 and Sec-WebSocket-Key2
-
-   This section describes two header fields for registration in the
-   Permanent Message Header Field Registry.  [RFC3864]
-
-   Header field name
-      Sec-WebSocket-Key1
-
-   Applicable protocol
-      http
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 47]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-   Status
-      reserved; do not use outside WebSocket handshake
-
-   Author/Change controller
-      IETF
-
-   Specification document(s)
-      This document is the relevant specification.
-
-   Related information
-      None.
-
-   Header field name
-      Sec-WebSocket-Key2
-
-   Applicable protocol
-      http
-
-   Status
-      reserved; do not use outside WebSocket handshake
-
-   Author/Change controller
-      IETF
-
-   Specification document(s)
-      This document is the relevant specification.
-
-   Related information
-      None.
-
-   The |Sec-WebSocket-Key1| and |Sec-WebSocket-Key2| headers are used in
-   the WebSocket handshake.  They are sent from the client to the server
-   to provide part of the information used by the server to prove that
-   it received a valid WebSocket handshake.  This helps ensure that the
-   server does not accept connections from non-Web-Socket clients (e.g.
-   HTTP clients) that are being abused to send data to unsuspecting
-   WebSocket servers.
-
-8.5.  Sec-WebSocket-Location
-
-   This section describes a header field for registration in the
-   Permanent Message Header Field Registry.  [RFC3864]
-
-   Header field name
-      Sec-WebSocket-Location
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 48]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-   Applicable protocol
-      http
-
-   Status
-      reserved; do not use outside WebSocket handshake
-
-   Author/Change controller
-      IETF
-
-   Specification document(s)
-      This document is the relevant specification.
-
-   Related information
-      None.
-
-   The |Sec-WebSocket-Location| header is used in the WebSocket
-   handshake.  It is sent from the server to the client to confirm the
-   URL of the connection.  This enables the client to verify that the
-   connection was established to the right server, port, and path,
-   instead of relying on the server to verify that the requested host,
-   port, and path are correct.
-
-8.6.  Sec-WebSocket-Origin
-
-   This section describes a header field for registration in the
-   Permanent Message Header Field Registry.  [RFC3864]
-
-   Header field name
-      Sec-WebSocket-Origin
-
-   Applicable protocol
-      http
-
-   Status
-      reserved; do not use outside WebSocket handshake
-
-   Author/Change controller
-      IETF
-
-   Specification document(s)
-      This document is the relevant specification.
-
-   Related information
-      None.
-
-   The |Sec-WebSocket-Origin| header is used in the WebSocket handshake.
-   It is sent from the server to the client to confirm the origin of the
-   script that opened the connection.  This enables user agents to
-
-
-
-Hickson                 Expires November 7, 2010               [Page 49]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-   verify that the server is willing to serve the script that opened the
-   connection.
-
-8.7.  Sec-WebSocket-Protocol
-
-   This section describes a header field for registration in the
-   Permanent Message Header Field Registry.  [RFC3864]
-
-   Header field name
-      Sec-WebSocket-Protocol
-
-   Applicable protocol
-      http
-
-   Status
-      reserved; do not use outside WebSocket handshake
-
-   Author/Change controller
-      IETF
-
-   Specification document(s)
-      This document is the relevant specification.
-
-   Related information
-      None.
-
-   The |Sec-WebSocket-Protocol| header is used in the WebSocket
-   handshake.  It is sent from the client to the server and back from
-   the server to the client to confirm the subprotocol of the
-   connection.  This enables scripts to both select a subprotocol and be
-   sure that the server agreed to serve that subprotocol.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 50]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-9.  Using the WebSocket protocol from other specifications
-
-   The WebSocket protocol is intended to be used by another
-   specification to provide a generic mechanism for dynamic author-
-   defined content, e.g. in a specification defining a scripted API.
-
-   Such a specification first needs to "establish a WebSocket
-   connection", providing that algorithm with:
-
-   o  The destination, consisting of a /host/ and a /port/.
-
-   o  A /resource name/, which allows for multiple services to be
-      identified at one host and port.
-
-   o  A /secure/ flag, which is true if the connection is to be
-      encrypted, and false otherwise.
-
-   o  An ASCII serialization of an origin that is being made responsible
-      for the connection.  [ORIGIN]
-
-   o  Optionally a string identifying a protocol that is to be layered
-      over the WebSocket connection.
-
-   The /host/, /port/, /resource name/, and /secure/ flag are usually
-   obtained from a URL using the steps to parse a WebSocket URL's
-   components.  These steps fail if the URL does not specify a
-   WebSocket.
-
-   If a connection can be established, then it is said that the
-   "WebSocket connection is established".
-
-   If at any time the connection is to be closed, then the specification
-   needs to use the "close the WebSocket connection" algorithm.
-
-   When the connection is closed, for any reason including failure to
-   establish the connection in the first place, it is said that the
-   "WebSocket connection is closed".
-
-   While a connection is open, the specification will need to handle the
-   cases when "a WebSocket message has been received" with text /data/.
-
-   To send some text /data/ to an open connection, the specification
-   needs to "send /data/ using the WebSocket".
-
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 51]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-10.  Acknowledgements
-
-   The WebSocket protocol is the result of many years of development,
-   and as such hundreds of people have contributed to the specification
-   during its lifetime.  Unfortunately, since the specification started
-   as nothing but a minor section of the larger WHATWG Web Applications
-   1.0 specification, and later the HTML5 specification, no record was
-   kept of who exactly contributed to what ended up becoming this
-   specification as opposed to who contributed to other parts of that
-   document.
-
-   The reader is therefore referred to the Acknowledgements section of
-   the WHATWG HTML specification for a full list of all contributions
-   that have been made to the source document from which this
-   specification is generated.  [HTML]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 52]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-11.  Normative References
-
-   [HTML]     Hickson, I., "HTML", May 2010, <http://whatwg.org/html5>.
-
-   [ORIGIN]   Barth, A., Jackson, C., and I. Hickson, "The HTTP Origin
-              Header", September 2009,
-              <http://tools.ietf.org/html/draft-abarth-origin>.
-
-   [RFC1321]  Rivest, R., "The MD5 Message-Digest Algorithm", RFC 1321,
-              April 1992.
-
-   [RFC2109]  Kristol, D. and L. Montulli, "HTTP State Management
-              Mechanism", RFC 2109, February 1997.
-
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, March 1997.
-
-   [RFC2246]  Dierks, T. and C. Allen, "The TLS Protocol Version 1.0",
-              RFC 2246, January 1999.
-
-   [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
-              Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
-              Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999.
-
-   [RFC2965]  Kristol, D. and L. Montulli, "HTTP State Management
-              Mechanism", RFC 2965, October 2000.
-
-   [RFC3490]  Faltstrom, P., Hoffman, P., and A. Costello,
-              "Internationalizing Domain Names in Applications (IDNA)",
-              RFC 3490, March 2003.
-
-   [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
-              10646", STD 63, RFC 3629, November 2003.
-
-   [RFC3864]  Klyne, G., Nottingham, M., and J. Mogul, "Registration
-              Procedures for Message Header Fields", BCP 90, RFC 3864,
-              September 2004.
-
-   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
-              Resource Identifier (URI): Generic Syntax", STD 66,
-              RFC 3986, January 2005.
-
-   [RFC3987]  Duerst, M. and M. Suignard, "Internationalized Resource
-              Identifiers (IRIs)", RFC 3987, January 2005.
-
-   [RFC4366]  Blake-Wilson, S., Nystrom, M., Hopwood, D., Mikkelsen, J.,
-              and T. Wright, "Transport Layer Security (TLS)
-              Extensions", RFC 4366, April 2006.
-
-
-
-Hickson                 Expires November 7, 2010               [Page 53]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-   [RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
-              Specifications: ABNF", STD 68, RFC 5234, January 2008.
-
-   [WEBADDRESSES]
-              Connolly, D. and C. Sperberg-McQueen, "Web addresses in
-              HTML 5", May 2009, <http://www.w3.org/html/wg/href/draft>.
-
-   [WSAPI]    Hickson, I., "The Web Sockets API", May 2010,
-              <http://dev.w3.org/html5/websockets/>.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 54]
-
-Internet-Draft           The WebSocket protocol                 May 2010
-
-
-Author's Address
-
-   Ian Hickson
-   Google, Inc.
-
-   Email: ian@hixie.ch
-   URI:   http://ln.hixie.ch/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hickson                 Expires November 7, 2010               [Page 55]
-
+           The value of the
