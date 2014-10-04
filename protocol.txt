@@ -4,12 +4,12 @@
 HyBi Working Group                                              I. Fette
 Internet-Draft                                              Google, Inc.
 Intended status: Standards Track                             A. Melnikov
-Expires: March 30, 2012                                        Isode Ltd
-                                                      September 27, 2011
+Expires: April 2, 2012                                         Isode Ltd
+                                                      September 30, 2011
 
 
                          The WebSocket protocol
-                draft-ietf-hybi-thewebsocketprotocol-16
+                draft-ietf-hybi-thewebsocketprotocol-17
 
 Abstract
 
@@ -41,7 +41,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 30, 2012.
+   This Internet-Draft will expire on April 2, 2012.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Fette & Melnikov         Expires March 30, 2012                 [Page 1]
+Fette & Melnikov          Expires April 2, 2012                 [Page 1]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -92,13 +92,13 @@ Table of Contents
    5.  Data Framing . . . . . . . . . . . . . . . . . . . . . . . . . 30
      5.1.  Overview . . . . . . . . . . . . . . . . . . . . . . . . . 30
      5.2.  Base Framing Protocol  . . . . . . . . . . . . . . . . . . 30
-     5.3.  Client-to-Server Masking . . . . . . . . . . . . . . . . . 34
-     5.4.  Fragmentation  . . . . . . . . . . . . . . . . . . . . . . 35
-     5.5.  Control Frames . . . . . . . . . . . . . . . . . . . . . . 37
+     5.3.  Client-to-Server Masking . . . . . . . . . . . . . . . . . 35
+     5.4.  Fragmentation  . . . . . . . . . . . . . . . . . . . . . . 36
+     5.5.  Control Frames . . . . . . . . . . . . . . . . . . . . . . 38
        5.5.1.  Close  . . . . . . . . . . . . . . . . . . . . . . . . 38
        5.5.2.  Ping . . . . . . . . . . . . . . . . . . . . . . . . . 39
        5.5.3.  Pong . . . . . . . . . . . . . . . . . . . . . . . . . 39
-     5.6.  Data Frames  . . . . . . . . . . . . . . . . . . . . . . . 39
+     5.6.  Data Frames  . . . . . . . . . . . . . . . . . . . . . . . 40
      5.7.  Examples . . . . . . . . . . . . . . . . . . . . . . . . . 40
      5.8.  Extensibility  . . . . . . . . . . . . . . . . . . . . . . 41
    6.  Sending and Receiving Data . . . . . . . . . . . . . . . . . . 42
@@ -108,7 +108,7 @@ Table of Contents
 
 
 
-Fette & Melnikov         Expires March 30, 2012                 [Page 2]
+Fette & Melnikov          Expires April 2, 2012                 [Page 2]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -164,7 +164,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                 [Page 3]
+Fette & Melnikov          Expires April 2, 2012                 [Page 3]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -220,7 +220,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                 [Page 4]
+Fette & Melnikov          Expires April 2, 2012                 [Page 4]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -276,7 +276,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                 [Page 5]
+Fette & Melnikov          Expires April 2, 2012                 [Page 5]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -332,7 +332,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                 [Page 6]
+Fette & Melnikov          Expires April 2, 2012                 [Page 6]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -388,7 +388,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                 [Page 7]
+Fette & Melnikov          Expires April 2, 2012                 [Page 7]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -444,7 +444,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                 [Page 8]
+Fette & Melnikov          Expires April 2, 2012                 [Page 8]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -500,7 +500,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                 [Page 9]
+Fette & Melnikov          Expires April 2, 2012                 [Page 9]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -556,7 +556,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 10]
+Fette & Melnikov          Expires April 2, 2012                [Page 10]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -612,7 +612,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 11]
+Fette & Melnikov          Expires April 2, 2012                [Page 11]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -668,7 +668,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 12]
+Fette & Melnikov          Expires April 2, 2012                [Page 12]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -724,7 +724,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 13]
+Fette & Melnikov          Expires April 2, 2012                [Page 13]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -780,7 +780,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 14]
+Fette & Melnikov          Expires April 2, 2012                [Page 14]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -836,7 +836,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 15]
+Fette & Melnikov          Expires April 2, 2012                [Page 15]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -892,7 +892,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 16]
+Fette & Melnikov          Expires April 2, 2012                [Page 16]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -948,7 +948,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 17]
+Fette & Melnikov          Expires April 2, 2012                [Page 17]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1004,7 +1004,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 18]
+Fette & Melnikov          Expires April 2, 2012                [Page 18]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1060,7 +1060,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 19]
+Fette & Melnikov          Expires April 2, 2012                [Page 19]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1116,7 +1116,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 20]
+Fette & Melnikov          Expires April 2, 2012                [Page 20]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1172,7 +1172,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 21]
+Fette & Melnikov          Expires April 2, 2012                [Page 21]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1228,7 +1228,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 22]
+Fette & Melnikov          Expires April 2, 2012                [Page 22]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1284,7 +1284,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 23]
+Fette & Melnikov          Expires April 2, 2012                [Page 23]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1340,7 +1340,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 24]
+Fette & Melnikov          Expires April 2, 2012                [Page 24]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1396,7 +1396,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 25]
+Fette & Melnikov          Expires April 2, 2012                [Page 25]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1452,7 +1452,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 26]
+Fette & Melnikov          Expires April 2, 2012                [Page 26]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1508,7 +1508,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 27]
+Fette & Melnikov          Expires April 2, 2012                [Page 27]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1564,7 +1564,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 28]
+Fette & Melnikov          Expires April 2, 2012                [Page 28]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1620,7 +1620,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 29]
+Fette & Melnikov          Expires April 2, 2012                [Page 29]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1658,11 +1658,12 @@ Internet-Draft           The WebSocket protocol           September 2011
    This wire format for the data transfer part is described by the ABNF
    [RFC5234] given in detail in this section.  (Note that unlike in
    other sections of this document the ABNF in this section is operating
-   on groups of bits.  When encoded on the wire the most significant bit
-   is the leftmost in the ABNF).  A high level overview of the framing
-   is given in the following figure.  In a case of conflict between the
-   figure below and the ABNF specified later in this section, the ABNF
-   version should be considered to be more authoritative.
+   on groups of bits.  The length of each group of bits is indicated in
+   a comment.  When encoded on the wire the most significant bit is the
+   leftmost in the ABNF).  A high level overview of the framing is given
+   in the following figure.  In a case of conflict between the figure
+   below and the ABNF specified later in this section, the figure is
+   authoritative.
 
 
 
@@ -1675,8 +1676,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-
-Fette & Melnikov         Expires March 30, 2012                [Page 30]
+Fette & Melnikov          Expires April 2, 2012                [Page 30]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1685,7 +1685,7 @@ Internet-Draft           The WebSocket protocol           September 2011
       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
      +-+-+-+-+-------+-+-------------+-------------------------------+
      |F|R|R|R| opcode|M| Payload len |    Extended payload length    |
-     |I|S|S|S|  (4)  |A|     (7)     |             (16/63)           |
+     |I|S|S|S|  (4)  |A|     (7)     |             (16/64)           |
      |N|V|V|V|       |S|             |   (if payload len==126/127)   |
      | |1|2|3|       |K|             |                               |
      +-+-+-+-+-------+-+-------------+ - - - - - - - - - - - - - - - +
@@ -1732,7 +1732,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 31]
+Fette & Melnikov          Expires April 2, 2012                [Page 31]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1788,7 +1788,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 32]
+Fette & Melnikov          Expires April 2, 2012                [Page 32]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -1803,31 +1803,54 @@ Internet-Draft           The WebSocket protocol           September 2011
       data.
 
    The base framing protocol is formally defined by the following ABNF
-   [RFC5234]:
+   [RFC5234].  It is important to note that the representation of this
+   data is binary, not ASCII characters.  As such, a field with a length
+   of 1 bit that takes values %x0 / %x1 is represented as a single bit
+   whose value is 0 or 1, not a full byte (octet) that stands for the
+   characters "0" or "1" in the ASCII encoding.  A field with a length
+   of 4 bits with values between %x0-F again is represented by 4 bits,
+   again NOT by an ASCII character or full byte (octet) with these
+   values.  [RFC5234] does not specify a character encoding - " Rules
+   resolve into a string of terminal values, sometimes called
+   characters.  In ABNF, a character is merely a non-negative integer.
+   In certain contexts, a specific mapping (encoding) of values into a
+   character set (such as ASCII) will be specified."  Here, the
+   specified encoding is a binary encoding where each terminal value is
+   encoded in the specified number of bits, which varies for each field.
 
-   ws-frame                = frame-fin
-                             frame-rsv1
-                             frame-rsv2
-                             frame-rsv3
-                             frame-opcode
-                             frame-masked
-                             frame-payload-length
-                             [ frame-masking-key ]
-                             frame-payload-data
+   ws-frame                = frame-fin           ; 1 bit in length
+                             frame-rsv1          ; 1 bit in length
+                             frame-rsv2          ; 1 bit in length
+                             frame-rsv3          ; 1 bit in length
+                             frame-opcode        ; 4 bits in length
+                             frame-masked        ; 1 bit in length
+                             frame-payload-length   ;  7 bits in length
+                             [ frame-masking-key ]  ; 16 or 64 bits in length
+                             frame-payload-data     ; n * 8 bits in length,
+                                                    ; where n >= 0
 
    frame-fin               = %x0 ; more frames of this message follow
                            / %x1 ; final frame of this message
+                                 ; 1 bit in length
 
    frame-rsv1              = %x0 / %x1
-                             ; 1 bit, MUST be 0 unless negotiated
+                             ; 1 bit in length, MUST be 0 unless negotiated
                              ; otherwise
 
    frame-rsv2              = %x0 / %x1
-                             ; 1 bit, MUST be 0 unless negotiated
+                             ; 1 bit in length, MUST be 0 unless negotiated
                              ; otherwise
 
+
+
+
+Fette & Melnikov          Expires April 2, 2012                [Page 33]
+
+Internet-Draft           The WebSocket protocol           September 2011
+
+
    frame-rsv3              = %x0 / %x1
-                             ; 1 bit, MUST be 0 unless negotiated
+                             ; 1 bit in length, MUST be 0 unless negotiated
                              ; otherwise
 
    frame-opcode            = frame-opcode-non-control /
@@ -1838,37 +1861,31 @@ Internet-Draft           The WebSocket protocol           September 2011
                            / %x3-7
                           ; reserved for further non-control frames
 
-
-
-
-
-
-
-Fette & Melnikov         Expires March 30, 2012                [Page 33]
-
-Internet-Draft           The WebSocket protocol           September 2011
-
-
    frame-opcode-control    = %x8 ; connection close
                            / %x9 ; ping
                            / %xA ; pong
                            / %xB-F ; reserved for further control frames
+                                ; 4 bits in length
 
    frame-masked            = %x0
                           ; frame is not masked, no frame-masking-key
                            / %x1
                           ; frame is masked, frame-masking-key present
+                          ; 1 bit in length
 
    frame-payload-length    = %x00-7D
                            / %x7E frame-payload-length-16
                            / %x7F frame-payload-length-63
+                           ; 7 bits in length
 
-   frame-payload-length-16 = %x0000-FFFF
+   frame-payload-length-16 = %x0000-FFFF ; 16 bits in length
 
    frame-payload-length-63 = %x0000000000000000-7FFFFFFFFFFFFFFF
+                           ; 64 bits in length
 
    frame-masking-key       = 4( %0x00-FF )
                              ; present only if frame-masked is 1
+                             ; 32 bits in length
 
    frame-payload-data      = (frame-masked-extension-data
                               frame-masked-application-data)
@@ -1879,13 +1896,24 @@ Internet-Draft           The WebSocket protocol           September 2011
 
    frame-masked-extension-data     = *( %x00-FF )
                            ; reserved for future extensibility
+                                   ; n*8 bits in length , where n >= 0
+
+
+
+Fette & Melnikov          Expires April 2, 2012                [Page 34]
+
+Internet-Draft           The WebSocket protocol           September 2011
+
 
    frame-masked-application-data   = *( %x00-FF )
+                                   ; n*8 bits in length, where n >= 0
 
    frame-unmasked-extension-data   = *( %x00-FF )
                            ; reserved for future extensibility
+                                   ; n*8 bits in length, where n >= 0
 
    frame-unmasked-application-data = *( %x00-FF )
+                                   ; n*8 bits in length, where n >= 0
 
 5.3.  Client-to-Server Masking
 
@@ -1896,14 +1924,6 @@ Internet-Draft           The WebSocket protocol           September 2011
    in Section 5.2 as frame-masking-key.  It is used to mask the payload
    data defined in the same section as frame-payload-data, which
    includes extension and application data.
-
-
-
-
-Fette & Melnikov         Expires March 30, 2012                [Page 34]
-
-Internet-Draft           The WebSocket protocol           September 2011
-
 
    The masking key is a 32-bit value chosen at random by the client.
    When preparing a masked frame, the client MUST pick a fresh masking
@@ -1933,6 +1953,14 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
    The payload length, indicated in the framing as frame-payload-length,
+
+
+
+Fette & Melnikov          Expires April 2, 2012                [Page 35]
+
+Internet-Draft           The WebSocket protocol           September 2011
+
+
    does NOT include the length of the masking key.  It is the length of
    the payload data, e.g. the number of bytes following the masking key.
 
@@ -1952,14 +1980,6 @@ Internet-Draft           The WebSocket protocol           September 2011
    the message into smaller fragments to better share the output
    channel.  (Note that the multiplexing extension is not described in
    this document.)
-
-
-
-
-Fette & Melnikov         Expires March 30, 2012                [Page 35]
-
-Internet-Draft           The WebSocket protocol           September 2011
-
 
    Unless specified otherwise by an extension, frames have no semantic
    meaning.  An intermediary might coalesce and/or split frames, if no
@@ -1990,6 +2010,13 @@ Internet-Draft           The WebSocket protocol           September 2011
       to that particular fragment.  In absence of extension data, the
       following example demonstrates how fragmentation works.
 
+
+
+Fette & Melnikov          Expires April 2, 2012                [Page 36]
+
+Internet-Draft           The WebSocket protocol           September 2011
+
+
       EXAMPLE: For a text message sent as three fragments, the first
       fragment would have an opcode of 0x1 and a FIN bit clear, the
       second fragment would have an opcode of 0x0 and a FIN bit clear,
@@ -2009,13 +2036,6 @@ Internet-Draft           The WebSocket protocol           September 2011
 
    o  An endpoint MUST be capable of handling control frames in the
       middle of a fragmented message.
-
-
-
-Fette & Melnikov         Expires March 30, 2012                [Page 36]
-
-Internet-Draft           The WebSocket protocol           September 2011
-
 
    o  A sender MAY create fragments of any size for non-control
       messages.
@@ -2045,6 +2065,14 @@ Internet-Draft           The WebSocket protocol           September 2011
       opcodes.
 
    _Note: if control frames could not be interjected, the latency of a
+
+
+
+Fette & Melnikov          Expires April 2, 2012                [Page 37]
+
+Internet-Draft           The WebSocket protocol           September 2011
+
+
    ping, for example, would be very long if behind a large message.
    Hence, the requirement of handling control frames in the middle of a
    fragmented message._
@@ -2065,13 +2093,6 @@ Internet-Draft           The WebSocket protocol           September 2011
    Control frames are used to communicate state about the WebSocket.
    Control frames can be interjected in the middle of a fragmented
    message.
-
-
-
-Fette & Melnikov         Expires March 30, 2012                [Page 37]
-
-Internet-Draft           The WebSocket protocol           September 2011
-
 
    All control frames MUST have a payload length of 125 bytes or less
    and MUST NOT be fragmented.
@@ -2101,6 +2122,13 @@ Internet-Draft           The WebSocket protocol           September 2011
    The application MUST NOT send any more data frames after sending a
    close frame.
 
+
+
+Fette & Melnikov          Expires April 2, 2012                [Page 38]
+
+Internet-Draft           The WebSocket protocol           September 2011
+
+
    If an endpoint receives a Close frame and that endpoint did not
    previously send a Close frame, the endpoint MUST send a Close frame
    in response.  (When sending a Close frame in response the endpoint
@@ -2121,14 +2149,6 @@ Internet-Draft           The WebSocket protocol           September 2011
    TCP close from the server in a reasonable time period.
 
    If a client and server both send a Close message at the same time,
-
-
-
-Fette & Melnikov         Expires March 30, 2012                [Page 38]
-
-Internet-Draft           The WebSocket protocol           September 2011
-
-
    both endpoints will have sent and received a Close message and should
    consider the WebSocket connection closed and close the underlying TCP
    connection.
@@ -2157,6 +2177,14 @@ Internet-Draft           The WebSocket protocol           September 2011
    frames.
 
    A Pong frame sent in response to a Ping frame must have identical
+
+
+
+Fette & Melnikov          Expires April 2, 2012                [Page 39]
+
+Internet-Draft           The WebSocket protocol           September 2011
+
+
    Application Data as found in the message body of the Ping frame being
    replied to.
 
@@ -2176,14 +2204,6 @@ Internet-Draft           The WebSocket protocol           September 2011
    opcodes for data frames include 0x1 (Text), 0x2 (Binary).  Opcodes
    0x3-0x7 are reserved for further non-control frames yet to be
    defined.
-
-
-
-
-Fette & Melnikov         Expires March 30, 2012                [Page 39]
-
-Internet-Draft           The WebSocket protocol           September 2011
-
 
    Data frames carry application-layer and/or extension-layer data.  The
    opcode determines the interpretation of the data:
@@ -2211,6 +2231,16 @@ Internet-Draft           The WebSocket protocol           September 2011
       *  0x81 0x85 0x37 0xfa 0x21 0x3d 0x7f 0x9f 0x4d 0x51 0x58
          (contains "Hello")
 
+
+
+
+
+
+Fette & Melnikov          Expires April 2, 2012                [Page 40]
+
+Internet-Draft           The WebSocket protocol           September 2011
+
+
    o  A fragmented unmasked text message
 
       *  0x01 0x03 0x48 0x65 0x6c (contains "Hel")
@@ -2232,14 +2262,6 @@ Internet-Draft           The WebSocket protocol           September 2011
    o  64KiB binary message in a single unmasked frame
 
       *  0x82 0x7F 0x0000000000010000 [65536 bytes of binary data]
-
-
-
-
-Fette & Melnikov         Expires March 30, 2012                [Page 40]
-
-Internet-Draft           The WebSocket protocol           September 2011
-
 
 5.8.  Extensibility
 
@@ -2270,29 +2292,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Fette & Melnikov         Expires March 30, 2012                [Page 41]
+Fette & Melnikov          Expires April 2, 2012                [Page 41]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2348,7 +2348,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 42]
+Fette & Melnikov          Expires April 2, 2012                [Page 42]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2404,7 +2404,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 43]
+Fette & Melnikov          Expires April 2, 2012                [Page 43]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2460,7 +2460,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 44]
+Fette & Melnikov          Expires April 2, 2012                [Page 44]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2516,7 +2516,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 45]
+Fette & Melnikov          Expires April 2, 2012                [Page 45]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2572,7 +2572,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 46]
+Fette & Melnikov          Expires April 2, 2012                [Page 46]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2628,7 +2628,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 47]
+Fette & Melnikov          Expires April 2, 2012                [Page 47]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2684,7 +2684,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 48]
+Fette & Melnikov          Expires April 2, 2012                [Page 48]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2740,7 +2740,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 49]
+Fette & Melnikov          Expires April 2, 2012                [Page 49]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2796,7 +2796,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 50]
+Fette & Melnikov          Expires April 2, 2012                [Page 50]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2852,7 +2852,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 51]
+Fette & Melnikov          Expires April 2, 2012                [Page 51]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2879,14 +2879,15 @@ Internet-Draft           The WebSocket protocol           September 2011
    the recipient of such malformed data MUST immediately _Fail the
    WebSocket Connection_.
 
-      Sec-WebSocket-Extensions = extension-list
-      extension-list = 1#extension
-      extension = extension-token *( ";" extension-param )
-      extension-token = registered-token
-      registered-token = token
-      extension-param = token [ "=" (token | quoted-string) ]
-          ;When using the quoted-string syntax variant, the value
-          ;after quoted-string unescaping MUST conform to the 'token' ABNF.
+         Sec-WebSocket-Extensions = extension-list
+         extension-list = 1#extension
+         extension = extension-token *( ";" extension-param )
+         extension-token = registered-token
+         registered-token = token
+         extension-param = token [ "=" (token | quoted-string) ]
+             ;When using the quoted-string syntax variant, the value
+             ;after quoted-string unescaping MUST conform to the
+             ;'token' ABNF.
 
    Note that like other HTTP header fields, this header field MAY be
    split or combined across multiple lines.  Ergo, the following are
@@ -2907,8 +2908,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-
-Fette & Melnikov         Expires March 30, 2012                [Page 52]
+Fette & Melnikov          Expires April 2, 2012                [Page 52]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -2964,7 +2964,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 53]
+Fette & Melnikov          Expires April 2, 2012                [Page 53]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3020,7 +3020,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 54]
+Fette & Melnikov          Expires April 2, 2012                [Page 54]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3076,7 +3076,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 55]
+Fette & Melnikov          Expires April 2, 2012                [Page 55]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3132,7 +3132,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 56]
+Fette & Melnikov          Expires April 2, 2012                [Page 56]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3188,7 +3188,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 57]
+Fette & Melnikov          Expires April 2, 2012                [Page 57]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3244,7 +3244,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 58]
+Fette & Melnikov          Expires April 2, 2012                [Page 58]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3300,7 +3300,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 59]
+Fette & Melnikov          Expires April 2, 2012                [Page 59]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3356,7 +3356,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 60]
+Fette & Melnikov          Expires April 2, 2012                [Page 60]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3412,7 +3412,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 61]
+Fette & Melnikov          Expires April 2, 2012                [Page 61]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3468,7 +3468,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 62]
+Fette & Melnikov          Expires April 2, 2012                [Page 62]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3524,7 +3524,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 63]
+Fette & Melnikov          Expires April 2, 2012                [Page 63]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3580,7 +3580,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 64]
+Fette & Melnikov          Expires April 2, 2012                [Page 64]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3636,7 +3636,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 65]
+Fette & Melnikov          Expires April 2, 2012                [Page 65]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3692,7 +3692,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 66]
+Fette & Melnikov          Expires April 2, 2012                [Page 66]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3748,7 +3748,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 67]
+Fette & Melnikov          Expires April 2, 2012                [Page 67]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3781,7 +3781,7 @@ Internet-Draft           The WebSocket protocol           September 2011
     -+----------------+-----------------------------------------+-
      | 12             +                Reserved                 |
     -+----------------+-----------------------------------------+-
-     | 13             + draft-ietf-hybi-thewebsocketprotocol-13 |
+     | 13             +   RFCXXXX (RFC Editor: please update)   |
     -+----------------+-----------------------------------------+-
 
 11.7.  WebSocket Close Code Number Registry
@@ -3804,7 +3804,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 68]
+Fette & Melnikov          Expires April 2, 2012                [Page 68]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3860,7 +3860,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 69]
+Fette & Melnikov          Expires April 2, 2012                [Page 69]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3916,7 +3916,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 70]
+Fette & Melnikov          Expires April 2, 2012                [Page 70]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -3972,7 +3972,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 71]
+Fette & Melnikov          Expires April 2, 2012                [Page 71]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -4028,7 +4028,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 72]
+Fette & Melnikov          Expires April 2, 2012                [Page 72]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -4084,7 +4084,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 73]
+Fette & Melnikov          Expires April 2, 2012                [Page 73]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -4140,7 +4140,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 74]
+Fette & Melnikov          Expires April 2, 2012                [Page 74]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -4162,8 +4162,8 @@ Internet-Draft           The WebSocket protocol           September 2011
 
    [I-D.ietf-websec-origin]
               Barth, A., "The Web Origin Concept",
-              draft-ietf-websec-origin-04 (work in progress),
-              August 2011.
+              draft-ietf-websec-origin-05 (work in progress),
+              September 2011.
 
 14.2.  Informative References
 
@@ -4196,7 +4196,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 75]
+Fette & Melnikov          Expires April 2, 2012                [Page 75]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -4252,7 +4252,7 @@ Internet-Draft           The WebSocket protocol           September 2011
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 76]
+Fette & Melnikov          Expires April 2, 2012                [Page 76]
 
 Internet-Draft           The WebSocket protocol           September 2011
 
@@ -4308,5 +4308,5 @@ Authors' Addresses
 
 
 
-Fette & Melnikov         Expires March 30, 2012                [Page 77]
+Fette & Melnikov          Expires April 2, 2012                [Page 77]
 
